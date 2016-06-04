@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="app_streaming:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="mnapp-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="app_streaming:war exploded" />
+    </root>
+  </artifact>
+</component>
