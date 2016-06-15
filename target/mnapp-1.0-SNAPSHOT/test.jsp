@@ -47,7 +47,7 @@
                     <a  href="sign_in">Sign in </a>
                 </li>
                 <li>
-                    <a  href="login">Login </a>
+                    <a  href="/login">Login </a>
                 </li>
 
                 <li>

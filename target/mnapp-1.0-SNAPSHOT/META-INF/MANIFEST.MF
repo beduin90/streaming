@@ -1,5 +1,8 @@
 Manifest-Version: 1.0
+Implementation-Version: 1.0-SNAPSHOT
 Built-By: beduin90
+Implementation-Vendor-Id: appstream
 Created-By: IntelliJ IDEA
 Build-Jdk: 1.8.0_92
+Main-Class: ${start-class}
 
