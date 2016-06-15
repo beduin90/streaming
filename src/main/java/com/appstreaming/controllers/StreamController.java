@@ -7,11 +7,19 @@ package com.appstreaming.controllers;
         import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HelloWorldController {
+public class StreamController {
 
     @RequestMapping( value =" / " )
     public String  home()
     {
         return "test";
+    }
+
+
+
+    @RequestMapping( value =" / " )
+    public String  login()
+    {
+        return "login";
     }
 }

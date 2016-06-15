@@ -10,8 +10,12 @@
 <html>
 <head>
     <title>Title</title>
+
+    <link href="<c:url value="/resources/css/font-awesome/css/font-awesome.min.css" />" rel="stylesheet">
+
     <link href="<c:url value="/resources/css/agency.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 
 
 </head>
@@ -40,19 +44,17 @@
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a  href="#services">Services</a>
+                    <a  href="sign_in">Sign in </a>
                 </li>
                 <li>
-                    <a  href="#portfolio">Portfolio</a>
+                    <a  href="login">Login </a>
+                </li>
+
+                <li>
+                    <a  href="about">About </a>
                 </li>
                 <li>
-                    <a  href="#about">About</a>
-                </li>
-                <li>
-                    <a  href="#team">Team</a>
-                </li>
-                <li>
-                    <a  href="#contact">Contact</a>
+                    <a  href="contact">Contact</a>
                 </li>
             </ul>
         </div>

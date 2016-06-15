@@ -2,15 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cba8cb7-6149-4596-b714-a4018a1a6316" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/application-context.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/appstreaming/HelloWorldController.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/normalize.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/style.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/HelloWorldController.java" afterPath="$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/StreamController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_streaming.iml" afterPath="$PROJECT_DIR$/app_streaming.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring-servlet.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/agency.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/agency.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/test.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/test.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/mnapp-1.0-SNAPSHOT/resources/css/agency.css" afterPath="$PROJECT_DIR$/target/mnapp-1.0-SNAPSHOT/resources/css/agency.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/mnapp-1.0-SNAPSHOT/resources/css/bootstrap.css" afterPath="$PROJECT_DIR$/target/mnapp-1.0-SNAPSHOT/resources/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/mnapp-1.0-SNAPSHOT/resources/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/target/mnapp-1.0-SNAPSHOT/resources/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/mnapp-1.0-SNAPSHOT/test.jsp" afterPath="$PROJECT_DIR$/target/mnapp-1.0-SNAPSHOT/test.jsp" />
     </list>
     <ignored path="app_streaming.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,34 +38,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="StreamController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/StreamController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HelloWorldController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/HelloWorldController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+            <state relative-caret-position="295">
+              <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
               <folding>
-                <element signature="e#287#288#0" expanded="true" />
-                <element signature="e#316#317#0" expanded="true" />
+                <element signature="e#283#284#0" expanded="true" />
+                <element signature="e#312#313#0" expanded="true" />
+                <element signature="e#384#385#0" expanded="true" />
+                <element signature="e#414#415#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppConfig.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AppConfig.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/util/AppConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+            <state relative-caret-position="408">
+              <caret line="24" column="44" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,11 +65,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/test.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="100" column="20" selection-start-line="100" selection-start-column="20" selection-end-line="103" selection-end-column="25" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.min.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -82,7 +98,7 @@
       <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
+            <state relative-caret-position="544">
               <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
               <folding />
             </state>
@@ -103,7 +119,67 @@
         <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/agency.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="0" column="105" selection-start-line="0" selection-start-column="105" selection-end-line="0" selection-end-column="105" />
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1732">
+              <caret line="4500" column="16" selection-start-line="4500" selection-start-column="0" selection-end-line="4500" selection-end-column="16" />
+              <caret line="4505" column="16" selection-start-line="4505" selection-start-column="0" selection-end-line="4505" selection-end-column="16" />
+              <caret line="4508" column="16" selection-start-line="4508" selection-start-column="0" selection-end-line="4508" selection-end-column="16" />
+              <caret line="4509" column="16" selection-start-line="4509" selection-start-column="0" selection-end-line="4509" selection-end-column="16" />
+              <caret line="4513" column="16" selection-start-line="4513" selection-start-column="0" selection-end-line="4513" selection-end-column="16" />
+              <caret line="4516" column="16" selection-start-line="4516" selection-start-column="0" selection-end-line="4516" selection-end-column="16" />
+              <caret line="4519" column="16" selection-start-line="4519" selection-start-column="0" selection-end-line="4519" selection-end-column="16" />
+              <caret line="4520" column="16" selection-start-line="4520" selection-start-column="0" selection-end-line="4520" selection-end-column="16" />
+              <caret line="4524" column="16" selection-start-line="4524" selection-start-column="0" selection-end-line="4524" selection-end-column="16" />
+              <caret line="4525" column="16" selection-start-line="4525" selection-start-column="0" selection-end-line="4525" selection-end-column="16" />
+              <caret line="4526" column="16" selection-start-line="4526" selection-start-column="0" selection-end-line="4526" selection-end-column="16" />
+              <caret line="4530" column="16" selection-start-line="4530" selection-start-column="0" selection-end-line="4530" selection-end-column="16" />
+              <caret line="4531" column="16" selection-start-line="4531" selection-start-column="0" selection-end-line="4531" selection-end-column="16" />
+              <caret line="4532" column="16" selection-start-line="4532" selection-start-column="0" selection-end-line="4532" selection-end-column="16" />
+              <caret line="4536" column="16" selection-start-line="4536" selection-start-column="0" selection-end-line="4536" selection-end-column="16" />
+              <caret line="4539" column="16" selection-start-line="4539" selection-start-column="0" selection-end-line="4539" selection-end-column="16" />
+              <caret line="4540" column="16" selection-start-line="4540" selection-start-column="0" selection-end-line="4540" selection-end-column="16" />
+              <caret line="4543" column="16" selection-start-line="4543" selection-start-column="0" selection-end-line="4543" selection-end-column="16" />
+              <caret line="4546" column="16" selection-start-line="4546" selection-start-column="0" selection-end-line="4546" selection-end-column="16" />
+              <caret line="4547" column="16" selection-start-line="4547" selection-start-column="0" selection-end-line="4547" selection-end-column="16" />
+              <caret line="4550" column="16" selection-start-line="4550" selection-start-column="0" selection-end-line="4550" selection-end-column="16" />
+              <caret line="4551" column="16" selection-start-line="4551" selection-start-column="0" selection-end-line="4551" selection-end-column="16" />
+              <caret line="4552" column="16" selection-start-line="4552" selection-start-column="0" selection-end-line="4552" selection-end-column="16" />
+              <caret line="4557" column="18" selection-start-line="4557" selection-start-column="2" selection-end-line="4557" selection-end-column="18" />
+              <caret line="4560" column="18" selection-start-line="4560" selection-start-column="2" selection-end-line="4560" selection-end-column="18" />
+              <caret line="4561" column="18" selection-start-line="4561" selection-start-column="2" selection-end-line="4561" selection-end-column="18" />
+              <caret line="4565" column="18" selection-start-line="4565" selection-start-column="2" selection-end-line="4565" selection-end-column="18" />
+              <caret line="4566" column="18" selection-start-line="4566" selection-start-column="2" selection-end-line="4566" selection-end-column="18" />
+              <caret line="4567" column="18" selection-start-line="4567" selection-start-column="2" selection-end-line="4567" selection-end-column="18" />
+              <caret line="4571" column="18" selection-start-line="4571" selection-start-column="2" selection-end-line="4571" selection-end-column="18" />
+              <caret line="4572" column="18" selection-start-line="4572" selection-start-column="2" selection-end-line="4572" selection-end-column="18" />
+              <caret line="4573" column="18" selection-start-line="4573" selection-start-column="2" selection-end-line="4573" selection-end-column="18" />
+              <caret line="4578" column="16" selection-start-line="4578" selection-start-column="0" selection-end-line="4578" selection-end-column="16" />
+              <caret line="4581" column="16" selection-start-line="4581" selection-start-column="0" selection-end-line="4581" selection-end-column="16" />
+              <caret line="4584" column="16" selection-start-line="4584" selection-start-column="0" selection-end-line="4584" selection-end-column="16" />
+              <caret line="4587" column="16" selection-start-line="4587" selection-start-column="0" selection-end-line="4587" selection-end-column="16" />
+              <caret line="4588" column="16" selection-start-line="4588" selection-start-column="0" selection-end-line="4588" selection-end-column="16" />
+              <caret line="4591" column="16" selection-start-line="4591" selection-start-column="0" selection-end-line="4591" selection-end-column="16" />
+              <caret line="4592" column="35" selection-start-line="4592" selection-start-column="19" selection-end-line="4592" selection-end-column="35" />
+              <caret line="4593" column="16" selection-start-line="4593" selection-start-column="0" selection-end-line="4593" selection-end-column="16" />
+              <caret line="4594" column="35" selection-start-line="4594" selection-start-column="19" selection-end-line="4594" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -114,9 +190,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="spring-beans.schema" />
         <option value="Class" />
+        <option value="CSS File" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -142,8 +219,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/appstreaming/util/AppConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/HelloWorldController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring-servlet.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/agency.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/fonts/main.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/test.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/agency.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/StreamController.java" />
       </list>
     </option>
   </component>
@@ -184,7 +267,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="width" value="1370" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -235,41 +319,27 @@
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -287,11 +357,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -313,11 +383,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -339,11 +409,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -369,11 +439,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app_streaming" />
+              <option name="myItemId" value="streaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -384,12 +454,88 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fonts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="streaming" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="streaming" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appstreaming" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="streaming" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="streaming" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appstreaming" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -401,9 +547,12 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.general" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\beduin90\IdeaProjects\streaming\src\main\webapp\resources\js" />
+      <recent name="C:\Users\beduin90\IdeaProjects\streaming\src\main\webapp\resources\css" />
       <recent name="C:\Users\beduin90\IdeaProjects\app_streaming\src\main\webapp\WEB-INF" />
     </key>
   </component>
@@ -1022,14 +1171,15 @@
       <workItem from="1465055770723" duration="551000" />
       <workItem from="1465056351047" duration="1979000" />
       <workItem from="1465058430648" duration="3321000" />
+      <workItem from="1466007321778" duration="1765000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11552000" />
+    <option name="totallyTimeSpent" value="13317000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1370" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1040,15 +1190,16 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.122599706" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.121522695" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24743778" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="SonarLint" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1083,6 +1234,61 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/StreamController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+          <folding>
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/util/AppConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/test.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/spring-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="64" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/agency.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="105" selection-start-line="0" selection-start-column="105" selection-end-line="0" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1091,13 +1297,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/HelloWorldController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/StreamController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
-            <element signature="e#287#288#0" expanded="true" />
-            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1152,13 +1360,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/HelloWorldController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/StreamController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
-            <element signature="e#287#288#0" expanded="true" />
-            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1205,13 +1415,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/HelloWorldController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/StreamController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
-            <element signature="e#287#288#0" expanded="true" />
-            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1258,13 +1470,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/HelloWorldController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/StreamController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
-            <element signature="e#287#288#0" expanded="true" />
-            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1340,7 +1554,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/HelloWorldController.java" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="136">
           <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
           <folding />
         </state>
@@ -1355,30 +1569,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/util/AppConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/HelloWorldController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-          <folding>
-            <element signature="e#287#288#0" expanded="true" />
-            <element signature="e#316#317#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
+        <state relative-caret-position="544">
           <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
           <folding />
         </state>
@@ -1392,19 +1585,114 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/agency.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="0" column="105" selection-start-line="0" selection-start-column="105" selection-end-line="0" selection-end-column="105" />
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1732">
+          <caret line="4500" column="16" selection-start-line="4500" selection-start-column="0" selection-end-line="4500" selection-end-column="16" />
+          <caret line="4505" column="16" selection-start-line="4505" selection-start-column="0" selection-end-line="4505" selection-end-column="16" />
+          <caret line="4508" column="16" selection-start-line="4508" selection-start-column="0" selection-end-line="4508" selection-end-column="16" />
+          <caret line="4509" column="16" selection-start-line="4509" selection-start-column="0" selection-end-line="4509" selection-end-column="16" />
+          <caret line="4513" column="16" selection-start-line="4513" selection-start-column="0" selection-end-line="4513" selection-end-column="16" />
+          <caret line="4516" column="16" selection-start-line="4516" selection-start-column="0" selection-end-line="4516" selection-end-column="16" />
+          <caret line="4519" column="16" selection-start-line="4519" selection-start-column="0" selection-end-line="4519" selection-end-column="16" />
+          <caret line="4520" column="16" selection-start-line="4520" selection-start-column="0" selection-end-line="4520" selection-end-column="16" />
+          <caret line="4524" column="16" selection-start-line="4524" selection-start-column="0" selection-end-line="4524" selection-end-column="16" />
+          <caret line="4525" column="16" selection-start-line="4525" selection-start-column="0" selection-end-line="4525" selection-end-column="16" />
+          <caret line="4526" column="16" selection-start-line="4526" selection-start-column="0" selection-end-line="4526" selection-end-column="16" />
+          <caret line="4530" column="16" selection-start-line="4530" selection-start-column="0" selection-end-line="4530" selection-end-column="16" />
+          <caret line="4531" column="16" selection-start-line="4531" selection-start-column="0" selection-end-line="4531" selection-end-column="16" />
+          <caret line="4532" column="16" selection-start-line="4532" selection-start-column="0" selection-end-line="4532" selection-end-column="16" />
+          <caret line="4536" column="16" selection-start-line="4536" selection-start-column="0" selection-end-line="4536" selection-end-column="16" />
+          <caret line="4539" column="16" selection-start-line="4539" selection-start-column="0" selection-end-line="4539" selection-end-column="16" />
+          <caret line="4540" column="16" selection-start-line="4540" selection-start-column="0" selection-end-line="4540" selection-end-column="16" />
+          <caret line="4543" column="16" selection-start-line="4543" selection-start-column="0" selection-end-line="4543" selection-end-column="16" />
+          <caret line="4546" column="16" selection-start-line="4546" selection-start-column="0" selection-end-line="4546" selection-end-column="16" />
+          <caret line="4547" column="16" selection-start-line="4547" selection-start-column="0" selection-end-line="4547" selection-end-column="16" />
+          <caret line="4550" column="16" selection-start-line="4550" selection-start-column="0" selection-end-line="4550" selection-end-column="16" />
+          <caret line="4551" column="16" selection-start-line="4551" selection-start-column="0" selection-end-line="4551" selection-end-column="16" />
+          <caret line="4552" column="16" selection-start-line="4552" selection-start-column="0" selection-end-line="4552" selection-end-column="16" />
+          <caret line="4557" column="18" selection-start-line="4557" selection-start-column="2" selection-end-line="4557" selection-end-column="18" />
+          <caret line="4560" column="18" selection-start-line="4560" selection-start-column="2" selection-end-line="4560" selection-end-column="18" />
+          <caret line="4561" column="18" selection-start-line="4561" selection-start-column="2" selection-end-line="4561" selection-end-column="18" />
+          <caret line="4565" column="18" selection-start-line="4565" selection-start-column="2" selection-end-line="4565" selection-end-column="18" />
+          <caret line="4566" column="18" selection-start-line="4566" selection-start-column="2" selection-end-line="4566" selection-end-column="18" />
+          <caret line="4567" column="18" selection-start-line="4567" selection-start-column="2" selection-end-line="4567" selection-end-column="18" />
+          <caret line="4571" column="18" selection-start-line="4571" selection-start-column="2" selection-end-line="4571" selection-end-column="18" />
+          <caret line="4572" column="18" selection-start-line="4572" selection-start-column="2" selection-end-line="4572" selection-end-column="18" />
+          <caret line="4573" column="18" selection-start-line="4573" selection-start-column="2" selection-end-line="4573" selection-end-column="18" />
+          <caret line="4578" column="16" selection-start-line="4578" selection-start-column="0" selection-end-line="4578" selection-end-column="16" />
+          <caret line="4581" column="16" selection-start-line="4581" selection-start-column="0" selection-end-line="4581" selection-end-column="16" />
+          <caret line="4584" column="16" selection-start-line="4584" selection-start-column="0" selection-end-line="4584" selection-end-column="16" />
+          <caret line="4587" column="16" selection-start-line="4587" selection-start-column="0" selection-end-line="4587" selection-end-column="16" />
+          <caret line="4588" column="16" selection-start-line="4588" selection-start-column="0" selection-end-line="4588" selection-end-column="16" />
+          <caret line="4591" column="16" selection-start-line="4591" selection-start-column="0" selection-end-line="4591" selection-end-column="16" />
+          <caret line="4592" column="35" selection-start-line="4592" selection-start-column="19" selection-end-line="4592" selection-end-column="35" />
+          <caret line="4593" column="16" selection-start-line="4593" selection-start-column="0" selection-end-line="4593" selection-end-column="16" />
+          <caret line="4594" column="35" selection-start-line="4594" selection-start-column="19" selection-end-line="4594" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/test.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="100" column="20" selection-start-line="100" selection-start-column="20" selection-end-line="103" selection-end-column="25" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/controllers/StreamController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+          <folding>
+            <element signature="e#283#284#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appstreaming/util/AppConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="44" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
