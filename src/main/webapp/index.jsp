@@ -51,7 +51,7 @@
                 </li>
 
                 <li>
-                    <a  href="about">About </a>
+                    <a  href="/streams">Yours Streams </a>
                 </li>
                 <li>
                     <a  href="contact">Contact</a>
