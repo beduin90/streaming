@@ -10,9 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-
     <link href="<c:url value="/resources/css/font-awesome/css/font-awesome.min.css" />" rel="stylesheet">
-
     <link href="<c:url value="/resources/css/agency.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
@@ -47,11 +45,11 @@
                     <a  href="sign_in">Sign in </a>
                 </li>
                 <li>
-                    <a  href="/login">Login </a>
+                    <a  href="login">Login </a>
                 </li>
 
                 <li>
-                    <a  href="/streams">Yours Streams </a>
+                    <a  href="streams">Yours Streams </a>
                 </li>
                 <li>
                     <a  href="contact">Contact</a>
@@ -70,13 +68,49 @@
 <section id="services">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">STREAM ONLINE</h2>
-                <h3 class="section-subheading text-muted">Welcome !!!!</h3>
+
+            <div class="col-sm-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>NICK
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="success">
+                        <td><img src="<c:url value="/resources/images/avatar.jpg"/>"></td>
+                        <td><h4>Doe</h4></td>
+                        <td>john@example.com</td>
+                        <TD><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                       <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
+                    </tr>
+                    <tr class="danger">
+                        <td><img src="<c:url value="/resources/images/avatar.jpg"/>"></td>
+                        <td class="vert-align"><h4>Moe</h4></td>
+                        <td class="vert-align">mary@example.com</td>
+                        <TD><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
+                    </tr>
+                    <tr class="info">
+                        <td><img src="<c:url value="/resources/images/avatar.jpg"/>"></td>
+                        <td><h4>Dooley</h4></td>
+                        <td>july@example.com</td>
+                        <TD><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
+                    </tr>
+                    </tbody>
+                </table>
+
+
             </div>
-        </div>
+            <div class="col-sm-6" id="STREAMS">Streams</div>
 
         </div>
+
+    </div>
 
 </section>
 
@@ -85,20 +119,11 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <span class="copyright">Copyright &copy; Your Website 2014</span>
             </div>
-            <div class="col-md-4">
-                <ul class="list-inline social-buttons">
-                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-4">
+
+            <div class="col-md-6">
                 <ul class="list-inline quicklinks">
                     <li><a href="#">Privacy Policy</a>
                     </li>
