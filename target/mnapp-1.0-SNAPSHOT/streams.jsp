@@ -80,33 +80,38 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="success">
+                    <tr class="success" id="row1">
                         <td><img src="<c:url value="/resources/images/avatar.jpg"/>"></td>
                         <td><h4>Doe</h4></td>
                         <td>john@example.com</td>
-                        <TD><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                       <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
+                        <TD><button type="button" class="btn btn-success "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                       <button type="button" class="btn btn-danger del"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
                     </tr>
-                    <tr class="danger">
+                    <tr class="danger" id="row2" >
                         <td><img src="<c:url value="/resources/images/avatar.jpg"/>"></td>
                         <td class="vert-align"><h4>Moe</h4></td>
                         <td class="vert-align">mary@example.com</td>
-                        <TD><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
+                        <TD ><button type="button"  id="r" class="btn btn-success "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                            <button type="button" class="btn btn-danger del "><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
                     </tr>
-                    <tr class="info">
+                    <tr class="success" id="row3">
                         <td><img src="<c:url value="/resources/images/avatar.jpg"/>"></td>
                         <td><h4>Dooley</h4></td>
                         <td>july@example.com</td>
-                        <TD><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
+                        <TD><button type="button"   class="btn btn-success "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                            <button type="button" class="btn btn-danger del"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
                     </tr>
                     </tbody>
                 </table>
 
 
             </div>
-            <div class="col-sm-6" id="STREAMS">Streams</div>
+            <div class="col-sm-6" id="STREAMS">
+
+
+
+
+            </div>
 
         </div>
 
@@ -137,8 +142,42 @@
 
 
 
-<script src="<c:url value="/resources/js/jquery.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+
+
+<script>
+
+
+    jQuery( document ).ready(function( $ ) {
+        $(".btn-success").click(function() {
+            var $tr = $(this).closest('tr').attr("id");
+            var list = $('#STREAMS');
+            list.after(' <button type="button" id="'+$tr+'c" class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true">'+$tr+'"</span></button>'
+
+            );
+
+            $(this).attr('disabled','disabled');
+        });
+
+
+
+        $(".del").click(function() {
+            var $tr = $(this).closest('tr').attr("id");
+            var list = $('#STREAMS');
+            $('#'+$tr+'c').remove();
+
+            $(this).prev().removeAttr("disabled");
+
+        });
+
+
+
+
+
+    });
+
+</script>
 
 </body>
 

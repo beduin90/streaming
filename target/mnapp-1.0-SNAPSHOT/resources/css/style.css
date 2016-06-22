@@ -12,13 +12,9 @@ body {
 }
 
 .table tbody>tr>td.vert-align{
-  vertical-align: bottom;
+  vertical-align: middle;
 }
 
-
-.glyphicon-plus{
-  font-size: 100px;
-}
 
 
 a {
