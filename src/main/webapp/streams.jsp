@@ -12,8 +12,8 @@
     <title>Title</title>
     <link href="<c:url value="/resources/css/font-awesome/css/font-awesome.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/agency.css" />" rel="stylesheet">
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery.js" />"></script>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 
 
 </head>
@@ -68,7 +68,20 @@
 <section id="services">
     <div class="container">
         <div class="row">
+            <div class="col-sm-12">
 
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span> </div>
+                            <input class="form-control" placeholder="Enter nick" type="text">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+                </div>
+
+
+            </div>
             <div class="col-sm-6">
                 <table class="table">
                     <thead>
@@ -85,21 +98,21 @@
                         <td><h4>Doe</h4></td>
                         <td>john@example.com</td>
                         <TD><button type="button" class="btn btn-success "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                       <button type="button" class="btn btn-danger del"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
+                       <button type="button" disabled class="btn btn-danger del"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
                     </tr>
                     <tr class="danger" id="row2" >
                         <td><img src="<c:url value="/resources/images/avatar.jpg"/>"></td>
                         <td class="vert-align"><h4>Moe</h4></td>
                         <td class="vert-align">mary@example.com</td>
                         <TD ><button type="button"  id="r" class="btn btn-success "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            <button type="button" class="btn btn-danger del "><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
+                            <button type="button" disabled class="btn btn-danger del "><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
                     </tr>
                     <tr class="success" id="row3">
                         <td><img src="<c:url value="/resources/images/avatar.jpg"/>"></td>
                         <td><h4>Dooley</h4></td>
                         <td>july@example.com</td>
                         <TD><button type="button"   class="btn btn-success "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            <button type="button" class="btn btn-danger del"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
+                            <button type="button" disabled class="btn btn-danger del"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> </TD>
                     </tr>
                     </tbody>
                 </table>
@@ -107,7 +120,8 @@
 
             </div>
             <div class="col-sm-6" id="STREAMS">
-
+                <ul id="draggablePanelList" style="list-style-type: none;"  class="list-unstyled">
+                </ul>
 
 
 
@@ -142,32 +156,57 @@
 
 
 
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 
 <script>
 
-
     jQuery( document ).ready(function( $ ) {
+
+
+        document.onreadystatechange = function () {
+            if (document.readyState == "interactive") {
+                initApplication();
+            }
+        }
+
+            var i=1;
         $(".btn-success").click(function() {
-            var $tr = $(this).closest('tr').attr("id");
-            var list = $('#STREAMS');
-            list.after(' <button type="button" id="'+$tr+'c" class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true">'+$tr+'"</span></button>'
 
-            );
+            var tr = $(this).closest('tr').attr('id');
+            var add=$('#draggablePanelList');
 
+
+
+            add.before(' <li class="panel panel-info" style="list-style-type: none;"  id="'+tr+'c'+'"> '+
+                    '<div class="panel-heading">'+i+'</div>'+
+                    '<div class="panel-body">HEllo</div>'+
+                    ' </li>');
+
+
+            if (i==1)
+            {
+                add.before
+            }
+
+                    i++;
             $(this).attr('disabled','disabled');
+            $(this).next().removeAttr('disabled');
         });
 
 
 
         $(".del").click(function() {
-            var $tr = $(this).closest('tr').attr("id");
-            var list = $('#STREAMS');
-            $('#'+$tr+'c').remove();
+            var $tr = $(this).closest('tr').attr('id');
+
+            var element=$('#'+$tr+'c');
+            if (element!=null)
+            {
+                element.remove();
+            }
 
             $(this).prev().removeAttr("disabled");
+            $(this).attr('disabled','disabled');
 
         });
 
@@ -177,7 +216,9 @@
 
     });
 
+
 </script>
+
 
 </body>
 

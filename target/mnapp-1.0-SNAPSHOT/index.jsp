@@ -15,7 +15,6 @@
 
     <link href="<c:url value="/resources/css/agency.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
 
 
 </head>
@@ -85,20 +84,11 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <span class="copyright">Copyright &copy; Your Website 2014</span>
             </div>
-            <div class="col-md-4">
-                <ul class="list-inline social-buttons">
-                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-4">
+
+            <div class="col-md-6">
                 <ul class="list-inline quicklinks">
                     <li><a href="#">Privacy Policy</a>
                     </li>
@@ -112,7 +102,6 @@
 
 
 <script src="<c:url value="/resources/js/jquery.js" />"></script>
-
 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 
 
