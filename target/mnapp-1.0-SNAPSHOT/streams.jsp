@@ -16,6 +16,16 @@
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 
 
+    <script type="text/javascript">
+        function loadApplet()
+        {
+            alert("Load Applet");
+            document.write("<applet code='DisplayWebcamVideo.class' height='300' width='300'></applet>");
+        }
+    </script>
+
+
+
 </head>
 
 
@@ -171,11 +181,12 @@
         }
 
             var i=1;
+        var accept=$('#STREAMS');
         $(".btn-success").click(function() {
 
             var tr = $(this).closest('tr').attr('id');
             var add=$('#draggablePanelList');
-    
+
 
 
             add.before(' <li class="panel panel-info" style="list-style-type: none;"  id="'+tr+'c'+'"> '+
@@ -186,8 +197,8 @@
 
             if (i==1)
             {
-                add.before
-            }
+                accept.after('<button onclick="loadApplet()">Click here</button>');
+        }
 
                     i++;
             $(this).attr('disabled','disabled');

@@ -2,6 +2,9 @@
   <library name="Maven: org.springframework:spring-webmvc:4.2.5.RELEASE">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.2.5.RELEASE/spring-webmvc-4.2.5.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Xuggler/commons-cli-1.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Xuggler/slf4j-api-1.6.4.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Xuggler/xuggle-xuggler-5.4.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.2.5.RELEASE/spring-webmvc-4.2.5.RELEASE-javadoc.jar!/" />
