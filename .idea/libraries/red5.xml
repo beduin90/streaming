@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="red5">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Desktop/red5" />
+      <root url="jar://$USER_HOME$/Desktop/red5/red5-server/commons-daemon-1.0.15.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/red5/red5-server/red5-server.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/red5/red5-server/red5-service.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
