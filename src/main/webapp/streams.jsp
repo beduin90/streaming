@@ -19,8 +19,10 @@
     <script type="text/javascript">
         function loadApplet()
         {
-            alert("Load Applet");
-            document.write("<applet code='DisplayWebcamVideo.class' height='300' width='300'></applet>");
+
+alert("Load Applet");
+          //  document.write("<applet type='applet' codebase='.' code='applet.HelloWorld.class' height='800' width='600'></applet>");
+
         }
     </script>
 
@@ -143,7 +145,12 @@
 
 </section>
 
-
+<jsp:plugin type="applet" codebase="." code="aplet.HelloWorld.class"
+            width="400" height="400">
+    <jsp:fallback>
+        <p>Unable to load applet</p>
+    </jsp:fallback>
+</jsp:plugin>
 
 <footer>
     <div class="container">

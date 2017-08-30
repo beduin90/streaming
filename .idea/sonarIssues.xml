@@ -8,6 +8,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../FirstTest/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../FirstTest/src/test/java/test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../app_streaming/pom.xml">
           <value>
             <set />
@@ -24,6 +34,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/appstreaming/main/DisplayWebcamVideo.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/appstreaming/main/HelloWorld.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/webapp/applet/HelloWorld.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/webapp/streams.jsp">
           <value>
             <set />
           </value>

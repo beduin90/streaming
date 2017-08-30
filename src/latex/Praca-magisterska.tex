@@ -1,0 +1,2414 @@
+\documentclass[12pt,a4paper]{mwrep}
+
+\usepackage{polski}
+%\usepackage[cp1250]{inputenc}   % kodowanie Windows
+%\usepackage[latin2]{inputenc}   % kodowanie ISO
+%\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\usepackage[T1]{fontenc}
+\usepackage{longtable}
+%\usepackage[top=2.5 cm, bottom=2.5 cm, left=3 cm, right=2 cm]{geometry}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{graphicx}
+%\usepackage{float}
+\usepackage{amsmath}
+
+\usepackage{tikz}       % rysowanie grafow
+
+\usepackage{listings}
+% Ustawienia dla pakietu listings.
+\lstset{
+language=python,
+basicstyle=\footnotesize,
+otherkeywords={self,yield}, % Add keywords here
+%inputencoding=cp1250,
+inputencoding=utf8,
+frame=lines,
+tabsize=4,
+showstringspaces=false,
+extendedchars=true,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% strona tytulowa
+
+\begin{document}
+\setcounter{secnumdepth}{3}
+\begin{titlepage}
+
+\begin{center}
+\textbf{\Large Uniwersytet Jagiello�?ski w Krakowie}
+\end{center}
+
+\begin{center}
+Wydzia�? Fizyki, Astronomii i Informatyki Stosowanej
+\end{center}
+
+\vfill
+\begin{center}
+\textbf{\large Maciej Niezabitowski}
+\end{center}
+
+\begin{center}
+Nr albumu: 1064648
+\end{center}
+
+\vfill
+\begin{center}
+\textbf{\LARGE Kolorowanie grafów z j�?zykiem Python}
+\end{center}
+
+\begin{center}
+Praca magisterska na kierunku Informatyka
+\end{center}
+
+\vfill
+\begin{flushright}
+Praca wykonana pod kierunkiem\\
+dra hab. Tomasz Romańczykiewicz \\
+Instytut Fizyki
+\end{flushright}
+
+\vfill
+\begin{center}
+Kraków 2017
+\end{center}
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% kolejna strona
+
+\thispagestyle{empty}
+
+\begin{flushleft}
+\textbf{\large O�?wiadczenie autora pracy}
+\end{flushleft}
+
+�?wiadom odpowiedzialno�?ci prawnej o�?wiadczam, şe niniejsza
+praca dyplomowa zosta�?a napisana przeze mnie samodzielnie
+i nie zawiera tre�?ci uzyskanych w sposób niezgodny
+z obowi�?zuj�?cymi przepisami.
+
+O�?wiadczam równieş, şe przedstawiona praca nie by�?a wcze�?niej
+przedmiotem procedur zwi�?zanych z uzyskaniem tytu�?u
+zawodowego w wyşszej uczelni.
+
+\vspace{2cm}
+\begin{flushleft}
+Kraków, dnia \hfill Podpis autora pracy
+\end{flushleft}
+
+\vspace{5cm}
+\begin{flushleft}
+\textbf{\large O�?wiadczenie kieruj�?cego prac�?}
+\end{flushleft}
+
+Potwierdzam, şe niniejsza praca zosta�?a przygotowana 
+pod moim kierunkiem i kwalifikuje si�? do przedstawienia jej
+w post�?powaniu o nadanie tytu�?u zawodowego.
+
+\vspace{2cm}
+\begin{flushleft}
+Kraków, dnia  \hfill Podpis kieruj�?cego prac�?
+\end{flushleft}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% podziekowania
+
+\thispagestyle{empty}
+
+\hbox{}\vfill
+\begin{flushright}
+\begin{tabular}{p{9 cm}}
+\textsl{Sk�?adam serdeczne podzi�?kowania Panu dr. hab. 
+Tomaszowi Romanczukiewiczowi, Promotorowi mojej pracy magisterskiej,
+za nieocenion�? şyczliwo�?�?, cenne uwagi merytoryczne, wszechstronn�?
+pomoc oraz powi�?cony czas, dzi�?ki którym niniejsza praca powsta�?a w 
+tym kszta�?cie i formie.}
+\end{tabular}
+\end{flushright}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% koniec podziekowan
+
+\begin{abstract}
+W pracy przedstawiono implementacj�? w j�?zyku Python wybranych
+algorytmów kolorowania grafów i wyznaczania pokrycia wierzcho�?kowego.
+Za�?oşono klasyczny model kolorowania, ale wspomniano o innych modelach.
+Zebrano wyniki teoretyczne dla grafów prostych, grafów planarnych
+i grafów dwudzielnych.
+Przygotowano testy poprawno�?ci i testy z�?oşono�?ci obliczeniowej,
+korzystaj�?ce ze standardowych modu�?ów Pythona (unittest, timeit).
+Stworzono takşe generator grafów dwudzielnych przypadkowych.
+
+Zaimplementaowano szereg algorytmów kolorowania wierzcho�?ków grafu:
+algorytm dok�?adny dla problemu m-kolorowania (algorytm z powrotami),
+algorytm bazuj�?cy na dowodzie twierdzenia Brooksa,
+dwa algorytmy zbiorów niezaleşnych (GIS, RLF).
+Powsta�?y nowe implementacje algorytmów sekwencyjnych
+z wykorzystaniem saturacji (US, RS, LF, SL, CS).
+
+Pokazano kilka algorytmów kolorowania kraw�?dzi:
+trzy algorytmy sekwencyjne (US, RS, algorytm bazuj�?cy na BFS)
+i algorytm NTL. Dzi�?ki mechanizmom zabezpieczaj�?cym j�?zyka Python
+wykryto braki w typowych opisach procedury przekolorowania kraw�?dzi
+z algorytmu NTL.
+
+W ko�?cu zaimplementowano dwa algorytmy znajduj�?ce najmniejsze pokrycie
+wierzcho�?kowe: algorytm 2-aproksymacyjny i algorytm zach�?anny
+wykorzystuj�?cy stopnie wierzcho�?ków.
+\newline
+\newline
+{\bf S�?owa kluczowe:} grafy, multigrafy, kolorowanie wierzcho�?ków,
+kolorowanie kraw�?dzi, pokrycie wierzcho�?kowe, zbiory niezaleşne
+
+\end{abstract}
+
+\newpage
+
+\thispagestyle{empty}
+\bigskip
+\textbf{English title:} Graph coloring with Python
+\bigskip
+\begin{center}
+\textbf{Abstract}
+\end{center}
+Python implementation of selected graph coloring algorithms
+and vertex cover algorithms is presented.
+The classical coloring model is assumed, but some other models
+are mentioned.
+Known theoretical results for simple graphs, planar graphs, 
+and bipartite graphs are collected.
+Tests for correctness and computational complexity are provided, 
+were standard Python modules are used (unittest, timeit).
+A generator of random bipartite graphs is added.
+
+The algorithms for a proper vertex coloring are presented:
+the exact algorithm for an m-coloring using backtracking,
+the algorithm based on the Brooks' theorem,
+two independent sets algorithms (GIS, RLF).
+New implementation (using saturation) for several sequential algorithms 
+is added (US, RS, LF, SL, CS).
+
+The algorithms for a proper edge coloring are shown:
+three sequential algorithms (US, RS, the algorithm using BFS) 
+and the NTL algorithm.
+It was found that the recolor procedure from the NTL algorithm
+is often not properly described in the literature.
+
+Finally, two algorithms for finding a minimum vertex cover are implemented:
+a 2-approximation algorithm and a greedy algorithm
+(using degrees of vertices).
+\newline
+\newline
+\textbf{Keywords:} graphs, multigraphs, vertex coloring, edge coloring,
+vertex cover, independent sets
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% spis tresci
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Listings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% koniec spisu tresci
+
+\chapter{Wst�?p}
+\label{ch:wstep}
+
+Kolorowanie grafów jest dzia�?em teorii grafów, która z kolei
+zaliczana jest do dziedziny pod nazw�? optymalizacja dyskretna
+\cite{Kubale}.
+Istnieje wiele modeli kolorowania grafów, czyli przypisywania
+kolorów wierzcho�?kom, kraw�?dziom, �?cianom grafu planarnego.
+W niniejszej pracy zajmujemy si�? klasycznym kolorowaniem
+wierzcho�?ków i klasycznym kolorowaniem kraw�?dzi grafu.
+Chodzi o przyporz�?dkowanie elementom grafu kolorów w taki sposób,
+aby s�?siaduj�?ce elementy otrzyma�?y róşne kolory.
+Modele nieklasyczne wprowadzaj�? zwykle dodatkowe ograniczenia 
+na uşywane kolory.
+
+Kolorowanie grafów ma duşe znaczenie praktyczne.
+Tak modeluje si�? zadania podzia�?u zbioru, zwieraj�?cego wewn�?trzne 
+konflikty mi�?dzy elementami, na podzbiory bezkonfliktowe
+\cite{Kubale}. W ogólno�?ci s�? to zadania trudne, czyli nie s�?
+znane efektywne algorytmy rozwi�?zuj�?ce je w czasie wielomianowym.
+St�?d rozwaşane s�? róşne szybkie algorytmy przyblişone
+lub teş szuka si�? szczególnych rodzin grafów, dla których
+moşna znaleź�? algorytmy dok�?adne, dzia�?aj�?ce w czasie wielomianowym.
+
+\section{Cel pracy}
+
+Celem pracy jest przygotowanie implementacji w j�?zyku Python
+klasycznych algorytmów kolorowania grafów.
+Mimo istnienia wielu modeli kolorowania grafów, dla wielu zastosowa�?
+podstawowe znaczenie ma model klasyczny. W nauczaniu teorii
+grafów równieş naturalne jest rozpocz�?cie tematu od modelu
+klasycznego. J�?zyk Python umoşliwia przygotowanie dzia�?aj�?cego
+kodu, który z drugiej strony moşe by�? analizowany tak jak
+pseudokod w~podr�?cznikach algorytmiki.
+
+Kolorowanie grafów pojawia si�? w wielu ksi�?şkach z teorii grafów:
+\cite{Kubale},
+\cite{Wojciechowski},
+\cite{Wilson},
+\cite{Deo},
+\cite{CLRS}.
+Cz�?sto s�? to jednak dowody matematyczne, czasem z pseudokodami,
+natomiast trudno znaleź�? wskazówki implementacyjne.
+Z pewno�?ci�? sposób implementacji cz�?�?ciowo zaleşy od uşytego
+j�?zyka programowania, ale pewne pomys�?y mog�? by�? bardziej
+uniwersalne. W kaşdym razie moşliwo�?�? sprawdzenia i uruchomienia
+poprawnej implementacji na pewno pomaga w lepszym zrozumieniu
+danego algorytmu.
+
+\section{Organizacja pracy}
+
+Praca zosta�?a podzielona na rozdzia�?y, stopniowo rozwijaj�?ce tematyk�? 
+kolorowania grafów. 
+Rozdzia�? \ref{ch:wstep}
+jest wprowadzeniem do niniejszej pracy. 
+Rozdzia�? \ref{ch:teoria_grafow}
+w usystematyzowany sposób przedstawia podstawowe poj�?cia z teorii 
+grafów potrzebne do opisu kolorowania grafów.
+Rodzia�? \ref{ch:implementacja_grafow}
+prezentuje implementacj�? grafów ze strukturami danych
+uşywanymi w bibliotece grafowej i w prezentowanych algorytmach.
+Rodzia�? \ref{ch:kolorowanie_wierzcholkow}
+przedstawia algorytmy kolorowania wierzcho�?ków, wyznaczania
+pokrycia wierzcho�?kowego, oraz problem zbiorów niezaleşnych. 
+Rozdzia�? \ref{ch:kolorowanie_krawedzi}
+zawiera algorytmy kolorowania kraw�?dzi oraz zagadnienia
+dotycz�?ce skojarzenia i pokrycia kraw�?dziowego. 
+Rozdzia�? \ref{ch:inne_modele_kolorowania}
+omawia inne modele kolorowania grafów. 
+Rodzia�? \ref{ch:podsumowanie} 
+zawiera podsumowanie pracy.
+W dodatku \ref{app:biblioteka_grafow} zestawiono stare i nowe
+modu�?y uşywane do kolorowania grafów.
+W dodatkach 
+\ref{app:test_vertex_cover},
+\ref{app:test_vertex_coloring},
+\ref{app:test_edge_coloring}
+zebrano wyniki testów odpowiednio dla pokrycia wierzcho�?kowego,
+kolorowania wierzcho�?ków i kolorowania kraw�?dzi.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Teoria grafów}
+\label{ch:teoria_grafow}
+
+Teoria grafów jest dzia�?em matematyki zajmuj�?cym si�? badaniem w�?asno�?ci grafów,
+które s�? strukturami matematycznymi uşywanymi do modelowania relacji
+pomi�?dzy obiektami. Teoria grafów jest istotnym narz�?dziem matematycznym
+wykorzystywanym w wielu innych dziedzinach nauki, takich jak
+informatyka, genetyka, socjologia, lingwistyka, czy badania operacyjne.
+Jedn�? z najwi�?kszych zada�? informatyki teoretycznej jest rozwój algorytmów 
+wyznaczaj�?cych pewne w�?a�?ciwo�?ci grafów.
+
+Opublikowana w 1741 roku praca autorstwa Leonarda Eulera pod tytu�?em 
+\emph{Solutio problematis ad geometriam situs pertinentis}
+w czasopi�?mie \emph{Commentarii academiae scientiarum Petropolitanae}, 
+poruszaj�?ca problem mostów królewieckich, uznawana jest za pierwsz�?
+prac�? na temat teorii grafów.
+
+\section{Grafy skierowane i nieskierowane}
+
+Graf $G=(V,E)$ definiowany jest jako uporz�?dkowana para sk�?adaj�?ca si�? 
+ze zbioru wierzcho�?ków $V$ oraz ze zbioru kraw�?dzi $E$ �?�?cz�?cych wierzcho�?ki.
+Wierzcho�?ki grafu mog�? by�? etykietowane i czasem stanowi�? reprezentacj�? 
+jakich�? obiektów, natomiast kraw�?dzie mog�? wówczas obrazowa�? relacje 
+mi�?dzy takimi obiektami. Wierzcho�?ki naleş�?ce do kraw�?dzi nazywane s�? jej 
+ko�?cami. Kraw�?dzie mog�? mie�? wyznaczony kierunek, a graf zawieraj�?cy takie 
+kraw�?dzie nazywany jest grafem skierowanym. Kraw�?dź grafu moşe posiada�? 
+wag�?, to znaczy przypisan�? liczb�?, która moşe okre�?la�? odleg�?o�?�? mi�?dzy 
+wierzcho�?kami, koszt, czas przejazdu, itp. 
+W grafie skierowanym wagi mog�? by�? zaleşne od kierunku 
+przechodzenia pomi�?dzy wierzcho�?kami.
+
+\paragraph{Definicja:} \emph{Graf skierowany (prosty)} to taka uporz�?dkowana
+para $G=(V,E)$, w której $V$ to niepusty zbiór wierzcho�?ków, a $E$ to zbiór
+kraw�?dzi skierowanych
+
+\begin{equation}
+E \subseteq \{ (u,v) : u,v \in V \}.
+\end{equation}
+
+W grafie skierowanym prostym, kraw�?dź $(u,v)$ jest par�? uporz�?dkowan�?
+sk�?adaj�?cym si�? z dwóch róşnych wierzcho�?ków, 
+z pocz�?tkiem w pierwszym wierzcho�?ku $u$, 
+a ko�?cem w drugim wierzcho�?ku $v$.
+
+\paragraph{Definicja:} \emph{Graf nieskierowany (prosty)} to taka uporz�?dkowana
+para $G=(V,E)$, w której $V$ to niepusty zbiór wierzcho�?ków, a $E$ to zbiór
+kraw�?dzi nieskierowanych
+
+\begin{equation}
+E \subseteq \{ \{ u,v \} : u,v \in V \}.
+\end{equation}
+
+W grafie nieskierowanym prostym, kraw�?dź $\{ u, v \}$ jest zbiorem 
+sk�?adaj�?cym si�? z dwóch róşnych wierzcho�?ków, 
+których kolejno�?�? nie ma znaczenia.
+
+\paragraph{Definicja:} \emph{Multigraf skierowany} to taka uporz�?dkowana
+para $G=(V,E)$, w której $V$ to niepusty zbiór wierzcho�?ków, 
+a $E$ to wielozbiór kraw�?dzi skierowanych.
+W $E$ elementy mog�? si�? powtarza�? (kraw�?dzie równoleg�?e),
+oraz mog�? wyst�?powa�? p�?tle typu $(v,v)$.
+
+\paragraph{Definicja:} \emph{Multigraf nieskierowany} to taka uporz�?dkowana
+para $G=(V,E)$, w której $V$ to niepusty zbiór wierzcho�?ków, 
+a $E$ to wielozbiór kraw�?dzi nieskierowanych.
+Kraw�?dzie nieskierowane to s�? wielozbiory dwuelementowe,
+a p�?tle maj�? posta�? $\{ v,v \}$.
+
+\section{�?cieşki i cykle}
+
+\paragraph{Definicja:} \emph{�?cieşka} pomi�?dzy wierzcho�?kami $v_0$ oraz $v_k$
+w grafie  $G=(V,E)$ to ci�?g wierzcho�?ków $(v_0, v_1, \dots , v_k)$ taki, 
+şe dla kaşdego $j \in \{0,1,\dots ,k-1 \}$ 
+istnieje kraw�?dź z $v_j$ do $v_{j+1}$, 
+a wierzcho�?ki w �?cieşce mog�? si�? powtarza�?. 
+D�?ugo�?�? $k$ takiej �?cieşki to liczba przeskoków pomi�?dzy wierzcho�?kami.
+\emph{�?cieşka prosta} jest to �?cieşka, w której wierzcho�?ki nie powtarzaj�? si�?.
+
+\paragraph{Definicja:} \emph{Cykl} to taka �?cieşka, w której pocz�?tkowy 
+i ko�?cowy wierzcho�?ek �?cieşki s�? takie same, $v_0 = v_k$.
+\emph{Cykl prosty} jest to cykl, w którym wierzcho�?ki nie mog�? si�? powtarza�?,
+za wyj�?tkiem pierwszego i ostatniego wierzcho�?ka. 
+W literaturze za cykl prosty uznaje si�? kaşd�? 
+p�?tl�? oraz dwie nieskierowane kraw�?dzie równoleg�?e. 
+Graf niezawieraj�?cy cykli prostych nazywany jest grafem acyklicznym.
+
+\section{Spójno�?�?}
+
+\paragraph{Definicja:} Graf nieskierowany nazywamy \emph{spójnym} 
+(ang. \emph{connected}), je�?li pomi�?dzy
+kaşd�? par�? wierzcho�?ków tego grafu istnieje �?�?cz�?ca je nieskierowana �?cieşka. 
+
+\paragraph{Definicja:} Graf skierowany jest \emph{silnie spójny} 
+(ang.  \emph{strongly connected}), je�?li istnieje skierowana �?cieşka pomi�?dzy 
+kaşd�? par�? wierzcho�?ków tego grafu.
+
+\section{Stopie�? grafu}
+
+\paragraph{Definicja:} \emph{Stopie�? wierzcho�?ka} to liczba kraw�?dzi 
+incydentnych do wierzcho�?ka. Stopie�? wierzcho�?ka równy jest sumie 
+wszystkich kraw�?dzi wchodz�?cych, wychodz�?cych oraz p�?tli, 
+które liczone s�? jak dwie kraw�?dzie. 
+Stopie�? wierzcho�?ka $v$ oznacza si�? poprzez $\deg(v)$.
+
+\paragraph{Definicja:} \emph{Stopie�? grafu} $\Delta(G)$ to maksymalny 
+stopie�? wierzcho�?ka w grafie.
+\emph{Graf regularny stopnia r} to graf, w którym wszystkie wierzcho�?ki 
+maj�? stopie�?~$r$.
+
+\begin{equation}
+\Delta(G)  = \operatorname{max} \{ \deg(v): v \in V(G) \}.
+\end{equation}
+
+\section{Wybrane rodziny grafów}
+
+\paragraph{Definicja:} \emph{Graf pe�?ny} to graf nieskierowany prosty, 
+w którym dla kaşdej pary wierzcho�?ków 
+istnieje kraw�?dź �?�?cz�?ca te dwa wierzcho�?ki. 
+Graf pe�?ny o $n$ wierzcho�?kach oznacza si�? jako ${K_n}$.
+
+\paragraph{Definicja:} \emph{Graf cykliczny} to graf nieskierowany spójny,
+w którym kaşdy wierzcho�?ek jest stopnia drugiego, 
+to znaczy şe liczba kraw�?dzi wychodz�?cych od tego wierzcho�?ka równa si�? 2.
+Graf cykliczny o $n$ wierzcho�?kach oznacza si�? jako ${C_n}$.
+
+\paragraph{Definicja:} \emph{Graf regularny stopnia} $n$ taki graf, w którym 
+wszystkie wierzcho�?ki grafu s�? stopnia $n$, czyli z kaşdego danego grafu wychodzi
+dok�?adnie $n$ kraw�?dzi. Graf regularny stopnia $n$ okre�?la si�? takşe \emph{grafem n-regularnym}. 
+Szczególnym przypadkiem grafów regularnych s�? \emph{grafy kubiczne}, inaczej nazywane 
+grafami 3-regularnymi.
+
+\paragraph{Definicja:} \emph{Graf dwudzielny} to graf, którego zbiór 
+wierzcho�?ków moşna podzieli�? na dwa roz�?�?czne zbiory w ten sposób, 
+şe kraw�?dzie nie �?�?cz�? wierzcho�?ków naleş�?cych do tego samego zbioru. 
+Czasem graf dwudzielny definiuje si�? jako trójk�? $G=(U, V, E)$, 
+gdzie $U$ i $V$ to dwa niepuste i roz�?�?czne zbiory wierzcho�?ków, 
+a zbiór kraw�?dzi $E \subseteq  U \times  V$.
+
+\paragraph{Definicja:} \emph{Graf planarny} to graf, który moşe zosta�? narysowany na p�?aszczyźnie tak,
+by krzywe obrazuj�?ce kraw�?dzie grafu nie przecina�?y si�? ze sob�?. Odwzorowanie grafu planarnego na 
+p�?aszczyźnie nazywa si�? \emph{rysunkiem p�?askim grafu}. Graf planarny o zbiorze wierzcho�?ków i kraw�?dzi
+zdefiniowanym poprzez rysunek p�?aski nazywamy \emph{grafem p�?askim}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Implementacja grafów}
+\label{ch:implementacja_grafow}
+
+W celu skorzystania z zaimplementowanych algorytmów kolorowania wierzcho�?ków 
+lub kraw�?dzi grafów, naleşy uruchomi�? sesj�? interaktywn�? interpretera Python,
+a nast�?pnie przej�?�? do lokalizacji
+w~której znajduj�? si�? pliki z kodem źród�?owym. 
+Przed uruchomieniem algorytmu naleşy zaimportowa�? 
+z~modu�?u \lstinline|edges| klas�? \lstinline|Edge|, 
+z~modu�?u \lstinline|graphs| klas�? \lstinline|Graph|,
+oraz z~modu�?u \lstinline|factory| obiekt \lstinline|GraphFactory|, 
+a nast�?pnie z~modu�?u algorytmu zaimportowa�? obiekt algorytmu.
+Kolejnym krokiem b�?dzie stworzenie fabryki grafów, za pomoc�? której 
+w kolejnym kroku wygenerowa�? moşna wybrany typ grafu, a nast�?pnie 
+uruchomi�? na stworzonym grafie algorytm. 
+Wynikowe kolorowanie moşna sprawdzi�? odczytuj�?c s�?ownik 
+\lstinline|algorithm.color|.
+
+Oto sesja interaktywna, zawieraj�?ca przyk�?adowe uşycie 
+algorytmu kolorowania wierzcho�?ków GIS.
+
+\begin{lstlisting}[caption={Korzystanie z kolorowania wierzcho�?ków GIS.},
+label={lst:korzystanie_z_GIS}]
+>>> from edges import Edge
+>>> from graphs import Graph
+>>> from factory import GraphFactory
+>>> from nodecolorgis import GISNodeColoring
+>>> graph_factory = GraphFactory(Graph)
+>>> V = 10
+>>> G = graph_factory.make_random(V, False, 0.5)
+>>> algorithm = GISNodeColoring(G)
+>>> algorithm.run()
+>>> algorithm.color
+{0: 0, 1: 2, 2: 1, 3: 3, 4: 0, 5: 0, 6: 4, 7: 1, 8: 1, 9: 0}
+\end{lstlisting}
+
+Nast�?pna sesja interaktywna zawiera przyk�?adowe uşycie 
+algorytmu kolorowania kraw�?dzi RS.
+
+\begin{lstlisting}[caption={Korzystanie z kolorowania kraw�?dzi RS.},
+label={lst:korzystanie_z_RS}]
+>>> from edges import Edge
+>>> from graphs import Graph
+>>> from factory import GraphFactory
+>>> from edgecolorrs import RandomSequentialEdgeColoring
+>>> graph_factory = GraphFactory(Graph)
+>>> V = 5
+>>> G = graph_factory.make_random(V, False, 0.5)
+>>> algorithm = RandomSequentialEdgeColoring(G)
+>>> algorithm.run()
+>>> algorithm.color
+{Edge(3, 4, 7): 3, Edge(1, 3, 9): 4, Edge(0, 4, 5): 2, 
+Edge(0, 1, 10): 0, Edge(1, 4, 2): 1, Edge(0, 3, 4): 1, 
+Edge(2, 4): 0, Edge(1, 2, 3): 2}
+\end{lstlisting}
+
+\section{Struktury danych z biblioteki grafów}
+\label{sec:struktury_danych}
+
+Dla wygody uşytkownika przedstawimy zestawienie struktur danych
+wykorzystywanych w naszej bibliotece grafowej.
+W kilku przypadkach wyst�?puje kilka moşliwych struktur danych 
+dla danego zagadnienia, poniewaş testowano róşne implementacje.
+
+\paragraph{Wierzcho�?ek:} Obiekt hashowalny, najcz�?�?ciej liczba
+lub string.
+
+\paragraph{Kraw�?dź:} Instancja klasy \lstinline|Edge|, która odpowiada
+kraw�?dzi skierowanej. Graf nieskierowany przechowuje wewn�?trznie
+kraw�?dź nieskierowan�? jako dwie kraw�?dzie skierowane
+z przeciwnymi kierunkami.
+
+\paragraph{Graf:} Instancja klasy \lstinline|Graph|.
+
+\paragraph{Multigraf:} Instancja klasy \lstinline|MultiGraph|.
+
+\paragraph{Algorytm:} Klasa z typowymi metodami \lstinline|__init__|
+do inicjalizacji danych i \lstinline|run| do w�?a�?ciwej pracy. 
+Wyniki dzia�?ania algorytmu s�? zapisane w odpowiednich atrybutach klasy.
+
+\paragraph{Drzewo rozpinaj�?ce:} Instancja klasy \lstinline|Graph|
+lub s�?ownik \lstinline|parent| z parami \lstinline|(node, node)| lub
+\lstinline|(node, None)| dla korzenia.
+
+\paragraph{Klika:} Zbiór wierzcho�?ków \lstinline|clique|
+lub s�?ownik z parami \lstinline|(node, bool)|.
+
+\paragraph{Zbiór niezaleşny:} Zbiór wierzcho�?ków \lstinline|independent_set|
+lub s�?ownik z parami \lstinline|(node, bool)|.
+
+\paragraph{Pokrycie wierzcho�?kowe:} Zbiór wierzcho�?ków \lstinline|node_cover|
+lub s�?ownik z parami \lstinline|(node, bool)|.
+
+\paragraph{Pokrycie kraw�?dziowe:} Zbiór kraw�?dzi \lstinline|edge_cover|,
+ale \lstinline|edge.source < edge.target|.
+
+\paragraph{Skojarzenie:} Zbiór kraw�?dzi lub s�?ownik \lstinline|mate|
+z parami \lstinline|(node, node)| lub \lstinline|(node, None)|
+dla wierzcho�?ka bez pary.
+W przypadku grafów waşonych s�?ownik \lstinline|mate|
+moşe zawiera�? pary \lstinline|(node, edge)| lub \lstinline|(node, None)|
+dla wierzcho�?ka bez pary, gdzie kraw�?dź z wag�? jest skierowana
+do drugiego wierzcho�?ka tworz�?cego par�?.
+
+\paragraph{Kolorowanie wierzcho�?ków:} S�?ownik \lstinline|color|
+z parami \lstinline|(node, int)| lub \lstinline|(node, None)|
+przy braku koloru. Kolory s�? numerowane od 0 w gór�?.
+
+\paragraph{Kolorowanie kraw�?dzi:} S�?ownik \lstinline|color|
+z parami \lstinline|(edge, int)| lub \lstinline|(edge, None)|
+przy braku koloru, ale \lstinline|edge.source < edge.target|.
+Kolory s�? numerowane od 0 w~gór�?.
+Dla multigrafów kraw�?dzie musz�? by�? unikalne, tzn. przy kraw�?dziach
+równoleg�?ych musz�? by�? róşnice w atrybucie \lstinline|edge.weight|.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Kolorowanie wierzcho�?ków}
+\label{ch:kolorowanie_wierzcholkow}
+
+Kolorowanie wierzcho�?ków multigrafu (ang. \emph{vertex coloring})
+polega na przyporz�?dkowaniu wierzcho�?kom kolorów tak, 
+şe kaşda kraw�?dź �?�?czy wierzcho�?ki o róşnych kolorach
+\cite{wiki_graph_coloring}.
+Jest to tzw. kolorowanie w�?a�?ciwe lub dozwolone
+(ang. \emph{proper coloring}), ale na etapach po�?rednich algorytmów
+kolorowania moşe pojawi�? si�? teş kolorowanie niew�?a�?ciwe.
+Kolorowanie niew�?a�?ciwe pojawia si�? takşe w dowodach twierdze�?
+o kolorowaniach.
+
+W problemie kolorowania wierzcho�?ków
+rozpatruje si�? multigrafy spójne, nieskierowane i bez p�?tli.
+Kraw�?dzie wielokrotne mog�? by�? pomini�?te bez straty ogólno�?ci.
+Jeşeli dla danego multigrafu istnieje dozwolone kolorowanie
+wierzcho�?ków zawieraj�?ce $k$ kolorów, to mówimy şe multigraf
+jest \emph{k-kolorowalny wierzcho�?kowo}.
+Kolorowanie wierzcho�?ków jest \emph{optymalne},
+jeşeli zawiera najmniejsz�? moşliw�? liczb�? kolorów.
+Ta najmniejsza liczba kolorów to \emph{liczba chromatyczna}
+(ang. \emph{chromatic number}),
+a oznaczana jest przez $\chi(G)$ lub $\chi_0(G)$.
+Problem znalezienia kolorowania optymalnego jest NP-trudny.
+Problem decyzyjny polegaj�?cy na okre�?leniu, czy dany graf jest
+$k$-kolorowalny wierzcho�?kowo, jest NP-zupe�?ny dla $k \ge 3$
+\cite{1976_Garey_J_S}.
+Grafy 1-kolorowalne to grafy bez kraw�?dzi.
+Grafy 2-kolorowalne to grafy dwudzielne, które moşna wykry�?
+w czasie liniowym $O(V+E)$.
+Optymalne kolorowanie wierzcho�?ków grafu jest podzia�?em
+jego wierzcho�?ków na minimaln�? liczb�? zbiorów niezaleşnych.
+
+\paragraph{Stwierdzenie:} Jeşeli $H$ jest podgrafem grafu $G$,
+to $\chi(H) \le \chi(G)$.
+
+\paragraph{Stwierdzenie:} Jeşeli graf $G$ jest niespójny, to
+\begin{equation}
+\chi(G) = \operatorname{max} \{ 
+\chi(C),\ C\ \mbox{sk�?adowa spójna $G$} \}.
+\end{equation}
+
+\section{Ograniczenia na liczb�? chromatyczn�?}
+\label{sec:chromatic_number_bounds}
+
+\begin{itemize}
+\item
+Jeşeli kaşdemu wierzcho�?kowi zostanie przydzielony inny kolor,
+to otrzymamy poprawne, ale na ogó�? nieoptymalne, kolorowanie 
+wierzcho�?ków. St�?d najprostsze ograniczenie ma posta�?
+\begin{equation}
+1 \le \chi(G) \le n,
+\end{equation}
+gdzie $G=(V,E)$, $n=|V|$, $m=|E|$.
+Dla grafu pe�?nego $\chi(K_n) = n$.
+\item
+Jeşeli graf $G$ zosta�? optymalnie pokolorowany, to musi istnie�?
+co najmniej jedna kraw�?dź pomi�?dzy zbiorami wierzcho�?ków
+pomalowanych na dwa róşne kolory
+\cite{Wojciechowski}, czyli
+\begin{equation}
+\chi(G) (\chi(G)-1) \le 2m.
+\end{equation}
+\item
+Jeşeli graf zawiera klik�?, czyli podgraf b�?d�?cy grafem pe�?nym,
+to rozmiar tej kliki jest dolnym ograniczeniem na liczb�? 
+chromatyczn�?. Dok�?adniej, liczba chromatyczna nie moşe by�?
+mniejsza od rozmiaru najwi�?kszej kliki w grafie.
+To ograniczenie jest �?cis�?e dla grafów doskona�?ych,
+do których naleş�? np. grafy przedzia�?owe.
+Z drugiej strony, istniej�? grafy Mycielskiego, dla których najwi�?ksze
+kliki maj�? rozmiar 2, a liczba chromatyczna moşe by�? dowolnie duşa
+\cite{wiki_Mycielskian}.
+\item
+Dla grafów dwudzielnych $\chi(G) = 2$.
+\item
+Przy wykorzystaniu algorytmu zach�?annego moşna poka�?, şe
+\begin{equation}
+\chi(G) \le \Delta(G) + 1,
+\end{equation}
+gdzie $\Delta(G)$ jest najwi�?kszym stopniem wierzcho�?ka w grafie $G$.
+Ograniczenie $\Delta(G) + 1$ jest najgorsz�? liczb�? kolorów,
+jak�? moşna otrzyma�? z kolorowania zach�?annego.
+Co ciekawe, istnieje takie uporz�?dkowanie wierzcho�?ków, şe
+kolorowanie zach�?anne przydzieli optymaln�? liczb�? kolorów.
+Ale znalezienie takiego uporz�?dkowania wierzcho�?ków po�?ród $n!$
+permutacji jest problemem NP-trudnym.
+\item
+Graf ma \emph{degeneracj�?} $d$, jeşeli kaşdy jego podgraf ma
+wierzcho�?ek stopnia co najwyşej $d$.
+Uporz�?dkowanie degeneracji wierzcho�?ków jest to takie uporz�?dkowanie,
+w którym kaşdy wierzcho�?ek ma co najwyşej $d$ s�?siadów w zbiorze
+wcze�?niejszych wierzcho�?ków.
+Przy wykorzystaniu algorytmu zach�?annego z uporz�?dkowaniem degeneracji
+otrzymujemy ograniczenie
+\begin{equation}
+\chi(G) \le d + 1.
+\end{equation}
+W ten sposób dzia�?a algorytm SL (ang. \emph{smallest last}).
+\end{itemize}
+
+\paragraph{Twierdzenie (Brooks, 1941):} Dla grafu prostego nieskierowanego 
+spójnego $G$, który nie jest grafem pe�?nym i nie jest cyklem nieparzystym, 
+zachodzi
+\begin{equation}
+\chi(G) \le \Delta(G).
+\end{equation}
+Jeşeli graf $G$ jest grafem pe�?nym lub jest cyklem nieparzystym,
+to liczba chromatyczna wynosi $\chi(G) = \Delta(G) + 1$
+\cite{1941_Brooks},
+\cite{wiki_Brooks}. 
+Uproszczony dowód twierdzenia Brooksa poda�? Lovasz
+\cite{1975_Lovasz}.
+
+Jeşeli graf $G$ zawiera wierzcho�?ek $v$ stopnia mniejszego niş $\Delta(G)$,
+to algorytm zach�?anny powinien kolorowa�? wierzcho�?ki dalsze, a nast�?pnie
+blişsze $v$, a wtedy zostanie uşyte najwyşej $\Delta(G)$ kolorów.
+
+Jeşeli graf nie jest dwuspójny (ang. \emph{biconnected}),
+to kaşda sk�?adowa dwuspójna moşe by�? pokolorowana osobno,
+a nast�?pnie naleşy z�?�?czy�? pokolorowania.
+
+Najtrudniejszy jest przypadek grafu dwuspójnego $\Delta$-regularnego
+z $\Delta \ge 3$. Naleşy znaleź�? drzewo rozpinaj�?ce o korzeniu $v$,
+gdzie wierzcho�?ki $u$ i $w$ s�? s�?siadami $v$, ale nie ma kraw�?dzi
+mi�?dzy $u$ i $w$. Takie wierzcho�?ki $u$ i $w$ zawsze moşna znaleź�?,
+poniewaş w przeciwnym wypadku graf by�?by grafem pe�?nym.
+Wierzcho�?ki $u$ i $w$ otrzymuj�? najmniejszy kolor.
+Pozosta�?e wierzcho�?ki kolorujemy zach�?annie od najbardziej oddalonych
+od $v$, przez co zawsze b�?dzie wolny jeden z $\Delta$ kolorów.
+Na ko�?cu dojdziemy do wierzcho�?ka $v$, ale tu teş b�?dzie wolny
+jeden z $\Delta$ kolorów, poniewaş $u$ i $w$ maj�? wspólny kolor.
+
+Warto zauwaşy�?, şe w literaturze jest wiele niezaleşnych dowodów
+twierdzenia Brooksa
+\cite{1969_Melnikov_Vizing},
+\cite{2014_Cranston_Rabern}.
+Jednak nie wszystkie s�? konstruktywne, np. dowody nie wprost,
+a wtedy nie s�? zbyt pomocne w implementacji.
+
+
+\section{Kolorowanie wierzcho�?ków grafu planarnego}
+\label{sec:kolorowanie_wierzcholkow_planarny}
+
+Dla grafów planarnych udowodniono szereg mocnych twierdze�?.
+
+\paragraph{Twierdzenie:} Jeşeli $G$ jest
+grafem prostym planarnym, to $\chi(G) \le 6$.
+W~dowodzie indukcyjnym korzysta si�? z faktu, şe kaşdy graf planarny 
+prosty ma wierzcho�?ek stopnia co najwyşej 5.
+
+\paragraph{Twierdzenie (Heawood, 1890):} Jeşeli $G$ jest
+grafem prostym planarnym, to $\chi(G) \le 5$.
+
+\paragraph{Twierdzenie (Appel, Haken, 1976):} Jeşeli $G$ jest
+grafem prostym planarnym, to $\chi(G) \le 4$.
+Uproszczony dowód tego twierdzenia moşna znaleź�? w pracy
+\cite{1997_Robertson}.
+
+Problem stwierdzenia, czy graf planarny $G$ jest 3-kolorowalny
+wierzcho�?kowo, jest NP-zupe�?ny dla $\Delta(G) \ge 4$.
+Jeşeli $\Delta(G) = 3$ i graf $G$ jest róşny od grafu pe�?nego $K_4$,
+to $G$ jest 3-kolorowalny wierzcho�?kowo z twierdzenia Brooksa.
+
+
+\section{Zbiory niezaleşne}
+\label{sec:independent_set}
+
+\emph{Zbiór niezaleşny} (ang. \emph{independent set})
+grafu nieskierowanego $G=(V,E)$ jest to podzbiór $S$
+zbioru wierzcho�?ków grafu $V$, taki şe şadne dwa wierzcho�?ki
+z $S$ nie s�? po�?�?czone kraw�?dzi�? z $E$
+\cite{wiki_independent_set}.
+Maksymalny zbiór niezaleşny 
+(ang. \emph{maximal independent set}) nie jest podzbiorem
+wi�?kszego zbioru niezaleşnego.
+Najwi�?kszy zbiór niezaleşny
+(ang. \emph{maximum independent set}) jest zbiorem niezaleşnym
+o najwi�?kszej liczno�?ci w grafie $G$.
+Problem znalezienia najwi�?kszego zbioru niezaleşnego jest NP-trudny.
+
+\paragraph{Twierdzenie:} Zbiór $S$ jest zbiorem niezaleşnym
+wtedy i tylko wtedy, gdy jego dope�?nienie $V \backslash S$
+jest pokryciem wierzcho�?kowym.
+Kaşda kraw�?dź moşe by�? styczna do najwyşej jednego wierzcho�?ka
+ze zbioru $S$. St�?d kaşda kraw�?dź jest styczna do co najmniej
+jednego wierzcho�?ka ze zbioru $V \backslash S$.
+
+\subsection{Poprawno�?�? wyznaczenia zbioru niezaleşnego}
+
+Listing przedstawia metod�? klasy wywiedzionej z innej klasy
+\lstinline|unittest.TestCase|, która testuje algorytm
+zawarty w fikcyjnej klasie \lstinline|IndependentSet|.
+
+\begin{lstlisting}[caption={Test poprawno�?ci zbioru niezaleşnego.},
+label={lst:proper_independent_set}]
+def test_independent_set(self):
+    algorithm = IndependentSet(self.G)
+    algorithm.run()
+    for edge in self.G.iteredges():
+        self.assertFalse(edge.source in algorithm.independent_set
+                     and edge.target in algorithm.independent_set)
+\end{lstlisting}
+
+\section{Pokrycie wierzcho�?kowe}
+\label{sec:vertex_cover}
+
+\emph{Pokrycie wierzcho�?kowe} (ang. \emph{vertex cover})
+grafu nieskierowanego $G=(V,E)$ jest to podzbiór $C$ zbioru
+wierzcho�?ków grafu $V$, taki şe kaşda kraw�?dź z $E$ ma jako
+koniec jaki�? wierzcho�?ek z $C$
+\cite{wiki_vertex_cover}.
+Przyk�?adem trywialnego pokrycia wierzcho�?kowego jest 
+ca�?y zbiór $V$.
+
+Problem znalezienia najmniejszego pokrycia wierzcho�?kowego
+jest klasycznym problemem optymalizacyjnym NP-trudnym.
+W wersji decyzyjnej problem jest NP-zupe�?ny i polega na stwierdzeniu,
+czy w danym grafie istnieje pokrycie wierzcho�?kowe o danej
+liczbie wierzcho�?ków $k$.
+
+\subsection{Poprawno�?�? wyznaczenia pokrycia wierzcho�?kowego}
+
+Listing przedstawia metod�? klasy wywiedzionej z innej klasy
+\lstinline|unittest.TestCase|, która testuje algorytm
+zawarty w fikcyjnej klasie \lstinline|NodeCover|.
+
+\begin{lstlisting}[caption={Test poprawno�?ci pokrycia wierzcho�?kowego.},
+label={lst:proper_node_cover}]
+def test_node_cover(self):
+    algorithm = NodeCover(self.G)
+    algorithm.run()
+    for edge in self.G.iteredges():
+        self.assertTrue(edge.source in algorithm.node_cover
+                     or edge.target in algorithm.node_cover)
+\end{lstlisting}
+
+\subsection{Algorytm 2-aproksymacyjny dla pokrycia wierzcho�?kowego}
+
+Istnieje elegancki algorytm 2-aproksymacyjny dla problemu
+pokrycia wierzcho�?kowego \cite{CLRS}.
+
+\paragraph{Dane wej�?ciowe:} Graf prosty nieskierowany $G=(V,E)$.
+
+\paragraph{Problem:} Wyznaczenie pokrycia wierzcho�?kowego, którego
+rozmiar nie przekracza rozmiaru pokrycia optymalnego
+wi�?cej niş dwukrotnie.
+
+\paragraph{Opis algorytmu:} Algorytm rozpoczynamy od pustego
+pokrycia wierzcho�?kowego $C$. 
+Nast�?pnie rozwaşamy po kolei wszystkie kraw�?dzie z $E$. 
+Jeşeli oba ko�?ce kraw�?dzi $e$ nie naleş�? do $C$,
+to te oba ko�?ce dodajemy do $C$.
+W~przeciwnym razie kraw�?dź $e$ odrzucamy.
+
+\paragraph{Z�?oşono�?�?:} Z�?oşono�?�? czasowa algorytmu wynosi $O(V+E)$
+(dla reprezentacji list s�?siedztwa),
+poniewaş mamy p�?tl�? po kraw�?dziach, a w nich dodawanie
+$O(V)$ wierzcho�?ków do pokrycia $C$.
+Z�?oşono�?�? pami�?ciowa wynosi $O(V)$, poniewaş zapami�?tujemy
+wierzcho�?ki naleş�?ce do pokrycia.
+
+\paragraph{Uwagi:} Podamy uzasadnienie, şe jest to algorytm
+2-aproksymacyjny \cite{CLRS}. 
+Zbiór $C$ jest pokryciem wierzcho�?kowym, poniewaş kaşda kraw�?dź z $E$
+zostanie pokryta przez jaki�? wierzcho�?ek z $C$.
+Niech $A$ oznacza zbiór kraw�?dzi, których wierzcho�?ki wesz�?y do $C$.
+Kraw�?dzie w $A$ nie maj�? wspólnych ko�?ców, wi�?c $|C|=2|A|$.
+Pokrycie optymalne $C^{*}$ musi pokrywa�? wszystkie kraw�?dzie z $A$,
+zatem $|C^{*}| \ge |A|$.
+Ł�?cznie dostajemy oszacowanie $|C^{*}| \le |C| \le 2|C^{*}|$.
+
+\lstinputlisting[caption={Modu�? \lstinline|nodecoverapp|.},
+label={module:nodecoverapp}
+]{../src/main/nodecoverapp.py}
+
+
+\subsection{Algorytm zach�?anny dla pokrycia wierzcho�?kowego}
+
+\paragraph{Dane wej�?ciowe:} Graf prosty nieskierowany $G=(V,E)$.
+
+\paragraph{Problem:} Wyznaczenie pokrycia wierzcho�?kowego, którego
+moşe nie by�? optymalne.
+
+\paragraph{Opis algorytmu:} Algorytm rozpoczynamy od pustego
+pokrycia wierzcho�?kowego $C$. 
+Nast�?pnie rozwaşamy po kolei wszystkie kraw�?dzie z $E$. 
+Jeşeli oba ko�?ce kraw�?dzi $e$ nie naleş�? do $C$,
+to do $C$ dodajemy koniec o wi�?kszym stopniu, poniewaş w ten sposób
+moşemy pokry�? wi�?ksz�? liczb�? kraw�?dzi.
+W~przeciwnym razie kraw�?dź $e$ odrzucamy.
+
+\paragraph{Z�?oşono�?�?:} Z�?oşono�?�? czasowa algorytmu wynosi $O(V+E)$
+(dla reprezentacji list s�?siedztwa),
+poniewaş mamy p�?tl�? po kraw�?dziach, a w nich dodawanie
+$O(V)$ wierzcho�?ków do pokrycia $C$.
+Z�?oşono�?�? pami�?ciowa wynosi $O(V)$, poniewaş zapami�?tujemy
+wierzcho�?ki naleş�?ce do pokrycia.
+
+\lstinputlisting[caption={Modu�? \lstinline|nodecoverdeg|.},
+label={module:nodecoverdeg}
+]{../src/main/nodecoverdeg.py}
+
+
+\section{Poprawno�?�? kolorowania wierzcho�?ków}
+\label{sec:proper_vertex_coloring}
+
+Istnieje technika tworzenia programowania o nazwie 
+\emph{test-driven development (TDD)}, w ramach której najpierw
+programista tworzy automatyczny test sprawdzaj�?cy dodawan�?
+funkcjonalno�?�?, a potem implementuje funkcjonalno�?�?.
+Post�?puj�?c w tym duchu podamy test, jaki powinna spelnia�?
+kaşda metoda kolorowania wierzcho�?ków.
+Listing przedstawia metod�? klasy wywiedzionej z innej klasy
+\lstinline|unittest.TestCase|, która testuje algorytm
+zawarty w fikcyjnej klasie \lstinline|NodeColoring|.
+W te�?cie porównywane s�? kolory wierzcho�?ków na ko�?cach kaşdej
+kraw�?dzi.
+
+\begin{lstlisting}[caption={Test poprawno�?ci kolorowania wierzcho�?ków.},
+label={lst:proper_vertex_coloring}]
+def test_node_coloring(self):
+    algorithm = NodeColoring(self.G)
+    algorithm.run()
+    for node in self.G.iternodes():
+        self.assertNotEqual(algorithm.color[node], None)
+    for edge in self.G.iteredges():
+        self.assertNotEqual(algorithm.color[edge.source],
+                            algorithm.color[edge.target])
+\end{lstlisting}
+
+
+\section{Algorytm dok�?adny kolorowania wierzcho�?ków}
+\label{sec:exact_node_coloring}
+
+W naszej bibliotece jest juş obecny dok�?ady algorytm kolorowania
+wierzcho�?ków (modu�? \lstinline|nodecolorexact|). 
+Polega on na sukcesywnym sprawdzaniu wszystkich
+kombinacji dwóch, trzech i wi�?kszej liczby kolorów,
+aş do uzyskania poprawnego kolorowania.
+Algorytm ma z�?oşono�?�? $O(2^n)$ i jest stosowany tylko do kolorowania
+ma�?ych grafów (kilkana�?cie wierzcho�?ków).
+
+
+\section{Algorytm z powrotami dla kolorowania wierzcho�?ków}
+\label{sec:backtracking_node_coloring}
+
+Algorytmy z powrotami to algorytmy rekurencyjne, które systematycznie
+przeszukuj�? drzewo potencjalnych rozwi�?za�?.
+W porównaniu z algorytmami si�?owymi s�? bardziej inteligentne,
+poniewaş ga�?�?zie nie rokuj�?ce nadziei na znalezienie rozwi�?zania
+s�? porzucane.
+
+W odniesieniu do kolorowania wierzcho�?ków okre�?la si�? problem
+$m$-kolorowania (ang. \emph{m-coloring problem}),
+czyli problem znalezienia poprawnego kolorowania wierzcho�?ków
+grafu przy uşyciu co najwyşej $m$ kolorów.
+Czasem naleşy znaleź�? wszystkie moşliwe $m$-kolorowania,
+a czasem wystarczy nam jedno przyk�?adowe kolorowanie.
+
+\paragraph{Dane wej�?ciowe:} Graf prosty nieskierowany $G$,
+liczba $m$ dost�?pnych kolorów.
+
+\paragraph{Problem:} Kolorowanie wierzcho�?ków grafu $G$ przy uşyciu
+co najwyşej $m$ kolorów. Znaleź�? przyk�?adowe rozwi�?zanie lub
+zasygnalizowa�? brak rozwi�?za�?.
+
+\paragraph{Opis algorytmu:} Na pocz�?tku tworzona jest lista wierzcho�?ków
+grafu $G$ o nazwie \lstinline|node_list|, 
+przy czym kolejno�?�? wierzcho�?kow na li�?cie jest dowolna.
+Sercem algorytmu jest procedura rekurencyjna \lstinline|_graph_color(k)|,
+której argumentem jest indeks kolejnego wierzcho�?ka na li�?cie
+\lstinline|node_list|. Pierwsze uruchomienie procedury
+\lstinline|_graph_color(k)| jest dla $k=0$.
+W kaşdym kroku sprawdzane jest $m$ kolorów dla wierzcho�?ka $k$.
+Maksymalna g�?�?boko�?�? rekurencji to $k=n-1$.
+Rozwi�?zania cz�?�?ciowe s�? zapisywane, a w przypadku doj�?cia
+do �?lepej uliczki s�? usuwane.
+Do sprawdzenia poprawno�?ci cz�?�?ciowego rozwi�?zania uşywana jest
+funkcja \lstinline|_is_safe()|.
+
+\paragraph{Z�?oşono�?�?:} Pesymistyczna z�?oşono�?�? czasowa algorytmu 
+wynosi $O(n m^n)$, gdzie $n=|V|$, $m$ jest liczb�? dost�?pnych kolorów.
+Czynnik $O(n)$ pochodzi od funkcji \lstinline|_is_safe()|.
+Algorytm ma praktyczne znaczenie dla ma�?ych grafów
+lub ma�?ej liczby dost�?nych kolorów.
+
+\paragraph{Uwagi:} Jeşeli istnieje rozwi�?zanie problemu, to na pewno
+zostanie znalezione. Przedstawiona implementacja znajduje jedno
+przyk�?adowe $m$-kolorowanie lub wyzwala wyj�?tek, kiedy rozwi�?zanie
+nie istnieje.
+
+\lstinputlisting[caption={Modu�? \lstinline|nodecolorbt|.},
+label={module:nodecolorbt}
+]{../src/main/nodecolorbt.py}
+
+
+\section{Kolorowanie zach�?anne wierzcho�?ków}
+\label{sec:greedy_vertex_coloring}
+
+Kolorowanie zach�?anne (ang. \emph{greedy coloring})
+jest to kolorowanie wierzcho�?ków przy pomocy algorytmu zach�?annego,
+który przegl�?da wierzcho�?ki grafu w pewnej kolejno�?ci, oraz
+przydziela im pierwszy dost�?pny kolor
+\cite{wiki_greedy_coloring}.
+W~ogólnym przypadku kolorowanie zach�?anne nie przydziela
+najmniejszej moşliwej liczby kolorów. Z drugiej strony,
+kolorowanie zach�?anne jest podstaw�? wielu algorytmów przyblişonych.
+Kolorowanie zach�?anne jednego wierzcho�?ka
+realizuje metoda \lstinline|_greedy_color|,
+która b�?dzie pokazana przy algorytmie SL.
+
+Graf korona (ang. \emph{crown graph}) \cite{wiki_crown_graph}
+jest przyk�?adem bardzo z�?ego kolorowania metod�? zach�?ann�?.
+Graf korona powstaje z grafu pe�?nego dwudzielnego $K_{r,r}$
+przez usuni�?cie skojarzenia doskona�?ego.
+Graf korona jest grafem dwudzielnym z $V=V_1 \cup V_2$,
+$|V_1|=|V_2|=r$ i przy podawaniu do algorytmu zach�?annego wierzcho�?ków 
+najpierw z $|V_1|$, a potem z $|V_2|$, wykorzystane zostan�? dwa
+kolory. Jeşeli jednak do algorytmu b�?d�? podawane wierzcho�?ki
+naprzemiennie z $|V_1|$ i $|V_2|$, stanowi�?ce par�? z usuni�?tego
+skojarzenia, to liczba wykorzystanych kolorów wyniesie $r$.
+
+%\paragraph{RYSUNEK:} Rysunek z Wikipedii dla crown graph.
+%
+Wierzcho�?ki kaşdego grafu moşna uporz�?dkowa�? tak, aby algorytm
+zach�?anny stworzy�? kolorowanie optymalne.
+Wystarczy dla danego kolorowania optymalnego wybra�? wierzcho�?ki
+jednego koloru, tworz�?cego zbiór najwi�?kszy. Jako drugi zbiór wierzcho�?ków
+dla drugiego koloru, wybieramy zbiór najwi�?kszy ze wzgl�?du
+na pierwszy kolor, itd.
+
+Niestety znalezienie uporz�?dkowania wierzcho�?ków, przy którym
+algorytm zach�?anny stworzy kolorowanie optymalne,
+jest w ogólno�?ci problemem NP-trudnym.
+Dlatego algorytmy heurystyczne cz�?sto postuluj�? pewne uporz�?dkowanie,
+w nadziei na uzyskanie kolorowania bliskiego optymalnemu.
+
+
+\section{Algorytm kolorowania z twierdzenia Brooksa}
+\label{sec:Brooks_algorithm}
+
+\paragraph{Dane wej�?ciowe:} Graf prosty nieskierowany spójny $G$.
+
+\paragraph{Problem:} Kolorowanie wierzcho�?ków grafu $G$ przy uşyciu
+$\Delta(G)$ kolorów.
+
+\paragraph{Opis algorytmu:} Podstaw�? jest dowód twierdzenia Brooksa. 
+Algorytm dzia�?a dla grafu spójnego, który ma wierzcho�?ek
+stopnia mniejszego niş $\Delta(G)$.
+Jeşeli graf ma wszystkie wierzcho�?ki stopnia $\Delta$
+(graf $\Delta$-regularny), to algorytm dzia�?a dla grafów
+3-spójnych.
+Dla innych grafów $\Delta$-regularnych algorytm zadzia�?a,
+jeşeli uda si�? znaleź�? wierzcho�?ek $v$, którego dwaj s�?siedzi
+$u$ i $w$ nie s�? po�?�?czeni kraw�?dzi�?, a przy tym usuni�?cie
+z grafu wierzcho�?ków $u$ i $w$ nie rozdzieli grafu na osobne
+sk�?adowe. W naszej implementacji nie ma gwarancji znalezienia
+wierzcho�?ków o takich w�?asno�?ciach.
+
+\paragraph{Z�?oşono�?�?:} Z�?oşono�?�? czasowa algorytmu wynosi 
+co najwyşej $O(V^2)$, dla grafów bliskich grafowi pe�?nemu.
+
+\paragraph{Uwagi:} Ze wzgl�?du na uşycie algorytmu BFS grafy dwudzielne
+b�?d�? optymalnie pokolorowane dwoma kolorami.
+
+\lstinputlisting[caption={Modu�? \lstinline|nodecolorbrooks|.},
+label={module:nodecolorbrooks}
+]{../src/main/nodecolorbrooks.py}
+
+\section{Algorytmy sekwencyjne kolorowania wierzcho�?ków}
+\label{sec:sequential_algorithms}
+
+Algorytmy sekwencyjne kolorowania wierzcho�?ków bazuj�? na kolorowaniu 
+zach�?annym, a wierzcho�?ki s�? przegl�?dane w kolejno�?ci specyficznej
+dla konkretnego wariantu algorytmu.
+Rozwaşali�?my nast�?puj�?ce warianty:
+
+\begin{itemize}
+\item
+Metoda US (ang. \emph{Unordered Sequential}), gdzie 
+kolejno�?�? wierzcho�?ków wynika z implementacji grafu.
+Z�?oşono�?�? obliczeniowa wynosi $O(V+E)$.
+\item
+Metoda RS (ang. \emph{Random Sequential}), gdzie
+kolejno�?�? wierzcho�?ków jest pseudolosowa.
+Z�?oşono�?�? obliczeniowa wynosi $O(V+E)$.
+\item
+Metoda LF (ang. \emph{Largest First}), gdzie
+wierzcho�?ki s�? kolorowane wed�?ug nierosn�?cych stopni.
+Z�?oşono�?�? obliczeniowa wynosi $O(V+E)$.
+\item
+Metoda SL (ang. \emph{Smallest Last}), gdzie lista wierzcho�?ków
+jest przygotowywana od ko�?ca, przez wybieranie (i usuwanie) 
+wierzcho�?ków o najmniejszym stopniu na danym etapie.
+Z�?oşono�?�? obliczeniowa wynosi $O(V+E)$.
+W naszej implementacji wyznaczanie uporz�?dkowania wierzcho�?ków SL
+zajmuje czas $O(V^2)$. W pracy
+\cite{2008_Matula_Beck}
+opisano sposób uzyskania z�?oşono�?ci $O(V+E)$ przy uşyciu list
+powi�?zanych podwójnie (rodzaj sortowania bukietowego wierzcho�?ków
+ze wzgl�?du na stopnie).
+\item
+Metoda CS (ang. \emph{Connected Sequential}), gdzie
+kolejno�?�? wierzcho�?ków jest wyznaczona przez BFS lub DFS.
+Z�?oşono�?�? obliczeniowa wynosi $O(V+E)$.
+\item
+Metoda DSATUR lub SLF (ang. \emph{Saturation Largest First}), gdzie
+w kaşdym kroku wybierany jest wierzcho�?ek o najwi�?kszym 
+\emph{stopniu nasycenia} (liczba kolorów wyst�?puj�?ca u s�?siadów).
+\end{itemize}
+Podane algorytmy by�?y juş obecne w naszej bibliotece,
+ale dodali�?my nowe wersje, w których dla kaşdego wierzcho�?ka 
+przechowywane s�? zbiory kolorów uşywanych przez s�?siadów.
+Niestety nie prowadzi to do zwi�?kszenia szybko�?ci dzia�?ania.
+Analogiczny pomys�? dla problemu kolorowania kraw�?dzi przynosi
+ogromn�? popraw�? wydajno�?ci.
+
+Listing \ref{module:nodecolorsl} przedstawia now�? wersj�?
+algorytmu SL, która wykorzystuje kopi�? grafu do wyznaczenia
+odpowiedniej kolejno�?ci wierzcho�?ków.
+Metoda \lstinline|_greedy_color| realizuje kolorowanie zach�?anne.
+
+\lstinputlisting[caption={Modu�? \lstinline|nodecolorsl|.},
+label={module:nodecolorsl}
+]{../src/main/nodecolorsl.py}
+
+\section{Algorytmy z wymian�? kolorów}
+\label{sec:color_interchange}
+
+Algorytmy sekwencyjne mog�? by�? uzupe�?nione mechanizmem
+wymiany kolorów (ang. \emph{color interchange}), który zwykle
+prowadzi do poprawy kolorowania kosztem pewnego nak�?adu pracy.
+Wymiana kolorów jest uruchamiana w sytuacji, kiedy w danym
+kroku potrzebny jest nowy kolor dla przetwarzanego wierzcho�?ka.
+Wymian�? kolorów moşna zrobi�? na róşne sposoby.
+Jednym ze sposobów jest próba przekolorowania najblişszego s�?siada
+przetwarzanego wierzcho�?ka, w celu zwolnienia jednego koloru.
+W naszej bibliotece s�? obecne nast�?puj�?ce algorytmy
+z wymian�? kolorów:
+
+\begin{itemize}
+\item
+Metoda USI, czyli US z wymian�? kolorów.
+\item
+Metoda RSI, czyli RS z wymian�? kolorów.
+\item
+Metoda CSI, czyli CS z wymian�? kolorów.
+\end{itemize}
+
+
+\section{Algorytmy zbiorów niezaleşnych}
+\label{sec:iset_node_coloring}
+
+Kolorowanie wierzcho�?ków grafu jest w zasadzie podzia�?em
+zbioru wierzcho�?ków na pewn�? liczb�? zbiorów niezaleşnych.
+Wierzcho�?ki jednego koloru tworz�? jeden zbiór niezaleşny.
+St�?d pomys�? na osobn�? rodzin�? algorytmów, do której naleşy
+algorytm GIS (ang. \emph{Greedy Independent Sets}), oraz
+algorytm RLF (ang. \emph{Recursive Largest First})
+\cite{1979_Leighton}.
+W tych algorytmach sukcesywnie wyznacza si�? maksymalne
+zbiory niezaleşne w grafie i przydziela si�? wierzcho�?kom
+poszczególnych zbiorów niezaleşnych odr�?bne kolory.
+Algorytmy róşni�? si�? stosowan�? regu�?�? wyboru wierzcho�?ków
+do�?�?czanych do tworzonych zbiorów niezaleşnych
+\cite{Wojciechowski}.
+
+\subsection{Algorytm GIS kolorowania wierzcho�?ków}
+\label{sec:algorytm_GIS}
+
+\paragraph{Dane wej�?ciowe:} Dowolny graf prosty nieskierowany $G$.
+
+\paragraph{Problem:} Kolorowanie wierzcho�?ków grafu $G$.
+
+\paragraph{Opis algorytmu:} Algorytm przyporz�?dkowuje wierzcho�?kom
+kolor $c$ tak, aby dany wierzcho�?ek nie s�?siadowa�? z innym wierzcho�?kiem
+z kolorem $c$. Wierzcho�?ki s�? kolorowane w kolejno�?ci 
+\emph{najmniejszych} stopni w malej�?cym podgrafie indukowanym. 
+Podgraf indukowany zawiera tylko wierzcho�?ki bez koloru, 
+które nie s�?siaduj�? z wierzcho�?kami z kolorem $c$.
+Po przyporz�?dkowaniu koloru $c$ wszystkim moşliwym wierzcho�?kom, 
+wierzcho�?ki te s�? usuwane.
+Dalej procedura powtarza si�? z uşyciem koloru $c+1$, aş do momentu 
+pokolorowania wszystkich wierzcho�?ków grafu.
+
+\paragraph{Z�?oşono�?�?:} Z�?oşono�?�? czasowa algorytmu podawana w literaturze
+wynosi $O(V^2 + VE)$, co dla grafów spójnych prowadzi do $O(VE)$
+\cite{Wojciechowski}.
+Z�?oşono�?�? pami�?ciowa algorytmu zaleşy od implementacji.
+Jeşeli wykonujemy kopi�? grafu, to z�?oşono�?�? pami�?ciowa
+jest liniowa $O(V+E)$.
+Jeşeli wykorzystujemy tylko list�? stopni wierzcho�?ków, 
+to z�?oşono�?�? pami�?ciowa wyniesie $O(V)$.
+W niniejszej pracy sprawdzili�?my oba podej�?cia.
+
+\paragraph{Uwagi:} Do�?wiadczenie pokazuje, şe optymalne kolorowania
+nie zawsze odpowiadaj�? najwi�?kszym zbiorom niezaleşnym,
+do których zmierza regu�?a GIS w kaşdej iteracji.
+
+\lstinputlisting[caption={Modu�? \lstinline|nodecolorgis|.},
+label={module:nodecolorgis}
+]{../src/main/nodecolorgis.py}
+
+
+\subsection{Algorytm RLF kolorowania wierzcho�?ków}
+\label{sec:algorytm_RLF}
+
+\paragraph{Dane wej�?ciowe:} Dowolny graf prosty nieskierowany $G$.
+
+\paragraph{Problem:} Kolorowanie wierzcho�?ków grafu $G$.
+
+\paragraph{Opis algorytmu:} Algorytm przyporz�?dkowuje wierzcho�?kom
+kolor $c$ tak, aby dany wierzcho�?ek nie s�?siadowa�? z innym wierzcho�?kiem
+z kolorem $c$. Jako pierwszy wierzcho�?ek do kolorowania wybierany
+jest ten o najwi�?kszym stopniu w podgrafie generowanym
+przez wierzcho�?ki niepokolorowane. Nast�?pne
+wierzcho�?ki s�? kolorowane w kolejno�?ci \emph{najwi�?kszych}
+stopni w podgrafie indukowanym. 
+Podgraf indukowany zawiera tylko wierzcho�?ki bez koloru, 
+które s�?siaduj�? z wierzcho�?kami z kolorem $c$.
+Po przyporz�?dkowaniu koloru $c$ wszystkim moşliwym wierzcho�?kom, 
+wierzcho�?ki te s�? usuwane.
+Dalej procedura powtarza si�? z uşyciem koloru $c+1$, aş do momentu 
+pokolorowania wszystkich wierzcho�?ków grafu.
+
+\paragraph{Z�?oşono�?�?:} Z�?oşono�?�? czasowa algorytmu podawana w literaturze
+wynosi $O(V^2 + VE)$, co dla grafów spójnych prowadzi do $O(VE)$
+\cite{Wojciechowski}.
+
+\paragraph{Uwagi:} Regu�?a RLF zmierza do wyznaczania takich zbiorów 
+niezaleşnych, aby cz�?�?�? niepokolorowana grafu pozosta�?a 
+z jak najmniejsz�? liczb�? kraw�?dzi. 
+Zwykle jest to lepsza strategia niş regu�?a GIS.
+
+\lstinputlisting[caption={Modu�? \lstinline|nodecolorrlf|.},
+label={module:nodecolorrlf}
+]{../src/main/nodecolorrlf.py}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Kolorowanie kraw�?dzi}
+\label{ch:kolorowanie_krawedzi}
+
+Kolorowanie kraw�?dzi multigrafu (ang. \emph{edge coloring})
+polega na przyporz�?dkowaniu
+kraw�?dziom kolorów tak, şe dowolne dwie kraw�?dzie maj�?ce
+wspólny wierzcho�?ek dostaj�? róşne kolory
+\cite{wiki_edge_coloring}.
+Rozpatruje si�? tylko multigrafy spójne, nieskierowane,
+nie zawieraj�?ce p�?tli.
+Jeşeli dla danego multigrafu istnieje dozwolone kolorowanie kraw�?dzi
+zawieraj�?ce $k$ kolorów, to mówimy şe multigraf jest
+\emph{k-kolorowalny kraw�?dziowo}.
+Kolorowanie kraw�?dzi jest \emph{optymalne}, jeşeli zawiera
+najmniejsz�? moşliw�? liczb�? kolorów.
+Ta najmniejsza liczba kolorów nazywana jest
+\emph{indeksem chromatycznym} (ang. \emph{chromatic index}), 
+a oznaczana jest symbolem $\chi'(G)$ lub $\chi_1(G)$.
+Problem znajdowania optymalnego kolorowania kraw�?dzi jest NP-zupe�?ny.
+Optymalne kolorowanie kraw�?dzi grafu jest podzia�?em
+jego kraw�?dzi na minimaln�? liczb�? skojarze�?
+\cite{Wojciechowski}.
+
+
+\paragraph{Twierdzenie (Vizing, 1964):} Jeşeli $G$ jest grafem prostym, to
+\begin{equation}
+\Delta(G) \le \chi'(G) \le \Delta(G) + 1.
+\end{equation}
+St�?d istnieje podzia�? grafów na grafy klasy 1 [$\chi'(G) = \Delta(G)$]
+i grafy klasy 2 [$\chi'(G) = \Delta(G) + 1$].
+Badania pokazuj�?, şe liczba grafów z $n$ wierzcho�?kami w klasie 2
+jest znacznie mniejsza od liczby grafów w klasie 1.
+
+Do klasy 1 naleş�? grafy dwudzielne, 
+grafy pe�?ne $K_n$ ($n$ parzyste),
+grafy planarne o $\Delta \ge 8$,
+grafy ko�?a $W_n$,
+wi�?kszo�?�? grafów przypadkowych.
+Do klasy 2 naleş�? grafy cykliczne $C_n$ ($n$ nieparzyste),
+grafy pe�?ne $K_n$ ($n$ nieparzyste),
+şmir�?acze (ang. \emph{snarks}, grafy kubiczne 2-spójne kraw�?dziowo,
+np. graf Petersena)
+\cite{wiki_snark}.
+
+\paragraph{Twierdzenie (Shannon, 1949):} Dla kaşdego multigrafu $G$
+zachodzi 
+\begin{gather}
+\chi'(G) \le (3/2) \Delta(G), \\
+\chi'(G) \le \Delta(G) + \mu(G), 
+\end{gather}
+gdzie $\mu(G)$ to wielokrotno�?�? (ang. \emph{multiplicity}), 
+czyli najwi�?ksza liczba kraw�?dzi równoleg�?ych w jednej wi�?zce.
+Dla grafu prostego $\mu(G)=1$.
+
+\paragraph{Stwierdzenie:} Wszystkie grafy kubiczne hamiltonowskie
+s�? klasy 1. W grafach kubicznych liczba wierzcho�?ków jest parzysta,
+a cykl Hamiltona zawiera parzyst�? liczb�? kraw�?dzi.
+Wystarczy kraw�?dzie naleş�?ce do cyklu Hamiltona pokolorowa�?
+na przemian dwoma kolorami, a trzeci kolor wykorzysta�?
+dla pozosta�?ych kraw�?dzi.
+
+\section{Kolorowanie kraw�?dzi grafu dwudzielnego}
+\label{sec:kolorowanie_krawedzi_dwudzielny}
+
+\paragraph{Twierdzenie (K\"{o}nig, 1916):} Jeşeli $G$ jest 
+multigrafem dwudzielnym, to
+\begin{equation}
+\chi'(G) = \Delta(G).
+\end{equation}
+Istniej�? wydajne sekwencyjne algorytmy optymalnego kolorowania
+kraw�?dzi grafów dwudzielnych ($\Delta$ kolorów)
+\cite{1982_Cole_Hopcroft}.
+Uzyskane z�?oşono�?ci obliczeniowe to $O(E \Delta)$, a nawet
+$O(E \log \Delta)$.
+
+
+\section{Kolorowanie kraw�?dzi grafu planarnego}
+\label{sec:kolorowanie_krawedzi_planarny}
+
+\paragraph{Twierdzenie (Vising, 1965):} Grafy planarne 
+z $\Delta \ge 8$ s�? klasy 1.
+
+Vising poda�? równieş hipotez�? (Planar Graph Conjecture), 
+şe równieş grafy planarne z $\Delta=6$
+i $\Delta=7$ s�? klasy 1 (czyli �?�?cznie grafy planarne z $\Delta \ge 6$).
+W roku 2001 Sanders i Zhao pokazali, şe grafy planarne z $\Delta=7$
+s�? klasy 1 \cite{2001_Sanders_Zhao}.
+Przypadek $\Delta=6$ pozostaje otwarty.
+
+W pracy \cite{1990_Chrobak_Nishizeki} podano algorytm sekwencyjny
+przydzielaj�?cy $\Delta$ kolorów przy $\Delta \ge 9$,
+o z�?oşono�?ci $O(V \log V)$.
+Autorzy bazuj�? na dowodzie twierdzenia Visinga, a
+metoda nie dzia�?a dla grafów planarnych z $\Delta=8$.
+Ciekawe, şe metoda nie korzysta z~p�?askiej reprezentacji grafu
+i dzia�?a dla pewnych grafów toroidalnych.
+Algorytm z pracy \cite{1985_Gabow} przydziela $\Delta$ kolorów
+grafom planarnym z $\Delta \ge 8$ i ma z�?oşono�?�? $O(V^2)$.
+
+Podamy przyk�?ady grafów planarnych z ma�?ym $\Delta$, które s�? klasy 2.
+Vising pokaza�?, şe dla $\Delta=3,4,5$ moşna skonstruowa�? grafy
+planarne klasy 2 na bazie bry�? plato�?skich (wielo�?cianów foremnych),
+w których na jednej kraw�?dzi umieszcza si�? dodatkowy wierzcho�?ek.
+Dla $\Delta=2$ mamy cykle nieparzyste, np. $C_3=K_3$, $C_5$.
+Dla $\Delta=3$ przyk�?adem jest graf z $|V|=5$ z rysunku \ref{fig:planar1},
+zbudowany na bazie grafu tetraedru (czworo�?cianu).
+Dla $\Delta=4$ przyk�?adem jest graf z $|V|=5$ z rysunku \ref{fig:planar2}.
+Innym przyk�?adem jest graf z $|V|=7$,
+zbudowany na bazie grafu oktaedru (o�?mio�?cianu).
+Dla $\Delta=5$ przyk�?adem jest graf z $|V|=13$,
+zbudowany na bazie grafu ikosaedru (dwudziesto�?cianu).
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{../galeria/planar1.pdf}
+\caption[Graf planarny klasy 2 z $\Delta=3$.]{
+\label{fig:planar1}
+Graf planarny klasy 2 z $\Delta=3$.
+Jest to graf $K_4$, w którym na �?rodku jednej kraw�?dzi dodano
+pi�?ty wierzcho�?ek.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{../galeria/planar2.pdf}
+\caption[Graf planarny klasy 2 z $\Delta=4$.]{
+\label{fig:planar2}
+Graf planarny klasy 2 z $\Delta=4$.
+Jest to graf $K_4$, w którym trzy wierzcho�?ki po�?�?czono
+z pi�?tym wierzcho�?kiem.}
+\end{figure}
+
+
+
+
+\section{Skojarzenia}
+\label{sec:matching}
+
+\emph{Skojarzenie} (ang. \emph{matching}) w grafie nieskierowanym
+$G=(V,E)$ jest to taki podzbiór kraw�?dzi $M$, şe kaşdy wierzcho�?ek
+z $V$ jest ko�?cem co najwyşej jednej kraw�?dzi z $M$
+\cite{wiki_matching}.
+Czasem uşywana jest nazwa \emph{zbiór niezaleşny kraw�?dzi}
+(ang. \emph{independent edge set}).
+Skojarzenie jest \emph{maksymalne} (ang. \emph{maximal matching}),
+jeşeli nie jest podzbiorem şadnego innego skojarzenia.
+Skojarzenie jest \emph{najwi�?ksze (najliczniejsze)} 
+(ang. \emph{maximum matching}),
+jeşeli w grafie nie istnieje skojarzenie o wi�?kszej liczbie kraw�?dzi.
+
+Skojarzenie jest \emph{doskona�?e} (ang. \emph{perfect matching}),
+kiedy kaşdy wierzcho�?ek grafu jest ko�?cem pewnej kraw�?dzi
+naleş�?cej do tego skojarzenia. Skojarzenie doskona�?e moşe
+istnie�? tylko dla grafu o parzystej liczbie wierzcho�?ków.
+Skojarzenie doskona�?e jest maksymalne i najwi�?ksze.
+Skojarzenie doskona�?e jest jednocze�?nie pokryciem kraw�?dziowym
+grafu o najmniejszej liczno�?ci.
+
+% moze rysunek skojarzenia doskonalego
+% 0===1---2===3
+%  \  |   |
+%   \ |   |
+%    \|   |
+%     4===5
+
+W przypadku grafów dwudzielnych \cite{wiki_bipartite_graph}
+istnieje kilka algorytmów
+wielomianowych wyznaczaj�?cych najwi�?ksze skojarzenie:
+
+\begin{itemize}
+\item algorytm z metod�? Forda-Fulkersona,
+\item algorytm z metod�? �?cieşki powi�?kszaj�?cej,
+\item algorytm Hopcrofta-Karpa.
+\end{itemize}
+
+Zwi�?zek kolorowania kraw�?dzi ze skojarzeniami czasem pomaga
+w ustaleniu indeksu chromatycznego, ale czasem nie daje şadnych wskazówek
+\cite{wiki_edge_coloring}.
+
+\paragraph{Przyk�?ad:} Graf kubiczny na rysunku \ref{fig:planar3}
+ma $n=16$ wierzcho�?ków i $m=24$ kraw�?dzie, 
+ale dowolne najwi�?ksze skojarzenie ma 7 kraw�?dzi. 
+St�?d $24/7 > 3$ i indeks chromatyczny wynosi 4.
+
+\paragraph{Przyk�?ad:} Graf Petersena jest kubiczny, ma
+$n=10$ wierzcho�?ków i $m=15$ kraw�?dzi (rysunek \ref{fig:petersen}).
+Graf posiada skojarzenia doskona�?e zawieraj�?ce 5 kraw�?dzi.
+Mimo şe $15/5=3$, to indeks chromatyczny wynosi 4.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{../galeria/planar3.pdf}
+\caption[Graf planarny kubiczny klasy 2.]{
+\label{fig:planar3}
+Graf planarny kubiczny klasy 2.
+Jego dowolne najwi�?ksze skojarzenie zawiera 7 kraw�?dzi.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{../galeria/petersen.pdf}
+\caption{
+\label{fig:petersen}
+Graf Petersena z zaznaczonym skojarzeniem doskona�?ym.}
+\end{figure}
+
+\section{Pokrycie kraw�?dziowe}
+\label{sec:edge_cover}
+
+\emph{Pokrycie kraw�?dziowe} (ang. \emph{edge cover})
+grafu nieskierowanego $G=(V,E)$ jest to podzbiór $C$
+zbioru kraw�?dzi $E$, taki şe kaşdy wierzcho�?ek z $V$
+jest ko�?cem co najmniej jednej kraw�?dzi z $C$
+\cite{wiki_edge_cover}.
+Trywialnym i najwi�?kszym pokryciem kraw�?dziowym
+jest ca�?y zbiór $E$.
+
+\section{Poprawno�?�? kolorowania kraw�?dzi}
+\label{sec:proper_edge_coloring}
+
+Kieruj�?c si�? technik�? \emph{test-driven development}
+podamy test, jaki powinna spe�?nia�? kaşda metoda poprawnego
+kolorowania kraw�?dzi. Listing przedstawia metod�?, która testuje 
+algorytm zawarty w fikcyjnej klasie \lstinline|EdgeColoring|.
+W te�?cie porównywany jest stopie�? kaşdego wierzcho�?ka
+z liczb�? kolorów kraw�?dzi wychodz�?cych z wierzcho�?ka.
+
+\begin{lstlisting}[caption={Test poprawno�?ci kolorowania kraw�?dzi.},
+label={lst:proper_edge_coloring}]
+def test_edge_coloring(self):
+    algorithm = EdgeColoring(self.G)
+    algorithm.run()
+    for edge in self.G.iteredges():
+        self.assertNotEqual(algorithm.color[edge], None)
+    for node in self.G.iternodes():
+        color_set = set()
+        for edge in self.G.iteroutedges(node):
+            if edge.source > edge.target:
+                color_set.add(algorithm.color[~edge])
+            else:
+                color_set.add(algorithm.color[edge])
+        self.assertEqual(len(color_set), self.G.degree(node))
+\end{lstlisting}
+
+\section{Kolorowanie zach�?anne jednej kraw�?dzi}
+\label{sec:greedy_edge_coloring}
+
+Listing przedstawia metod�? \lstinline|_greedy_color|
+która realizuje kolorowanie zach�?anne jednej kraw�?dzi.
+
+\begin{lstlisting}[caption={Kolorowanie zach�?anne jednej kraw�?dzi.},
+label={lst:greedy_color_edge}]
+def _greedy_color(self, edge):
+    """Give edge the smallest possible color."""
+    k = 2 * self.graph.v()   # tyle miejsc na kolory wystarczy
+    used = [False] * k
+    for edge2 in self.graph.iteroutedges(edge.source):
+        if edge2.source > edge2.target:
+            edge2 = ~edge2
+        if self.color[edge2] is not None:
+            used[self.color[edge2]] = True
+    for edge2 in self.graph.iteroutedges(edge.target):
+        if edge2.source > edge2.target:
+            edge2 = ~edge2
+        if self.color[edge2] is not None:
+            used[self.color[edge2]] = True
+    for c in xrange(k):   # check colors
+        if not used[c]:
+            self.color[edge] = c
+            break
+    return c
+\end{lstlisting}
+
+Testy pokazuj�?, şe obliczanie za kaşdym razem kolorów zaj�?tych
+przez s�?siaduj�?ce kraw�?dzie jest powolne.
+Lepiej jest dla kaşdego wierzcho�?ka przechowywa�? zbiór kolorów
+wykorzystanych przez kraw�?dzie dochodz�?ce. Takie podej�?cie realizuje
+funkcja \lstinline|_greedy_color_with_saturation()|.
+Zaj�?ta pami�?�? jest rz�?du $O(V^2)$.
+
+\begin{lstlisting}[caption={Kolorowanie jednej kraw�?dzi z saturacj�?.},
+label={lst:saturated_color_edge}]
+def _greedy_color_with_saturation(self, edge):
+    """Give edge the smallest possible color."""
+    for c in xrange(self.m):
+        if (c in self.saturation[edge.source] or 
+            c in self.saturation[edge.target]):
+            continue   # kolor juz uzyty
+        else:   # kolor jest wolny
+            self.color[edge] = c
+            self.saturation[edge.source].add(c)
+            self.saturation[edge.target].add(c)
+            break   # kolor przydzielony
+    return c
+\end{lstlisting}
+
+\section{Kolorowanie kraw�?dzi z grafem kraw�?dziowym}
+\label{sec:graf_krawedziowy}
+
+Dla grafu $G$ moşna utworzy�? graf kraw�?dziowy $L(G)$ w nast�?puj�?cy sposób.
+Wierzcho�?ki w $L(G)$ reprezentuj�? kraw�?dzie w $G$.
+Kraw�?dzie w $L(G)$ reprezentuj�? s�?siedztwo kraw�?dzi w $G$
+(czy maj�? wspólny wierzcho�?ek w $G$).
+W tej sytuacji kolorowanie kraw�?dzi grafu $G$ sprowadza si�?
+do kolorowania wierzcho�?ków grafu kraw�?dziowego.
+St�?d moşna wysnu�? wniosek, şe model kolorowania wierzcho�?ków
+jest ogólniejszy \cite{Wojciechowski}.
+
+Algorytm kolorowania kraw�?dzi z grafem kraw�?dziowym
+jest dost�?pny w~bibliotece
+algorytmów grafowych rozwijanej w Instytucie Fizyki
+\cite{graphs-dict}. Algorytm jest zawarty w klasie
+\lstinline|EdgeColoringWithLineGraph|.
+
+
+\section{Algorytm US kolorowania kraw�?dzi}
+\label{sec:kolorowanie_krawedzi_us}
+
+\paragraph{Dane wej�?ciowe:} Dowolny graf prosty nieskierowany $G$.
+
+\paragraph{Problem:} Kolorowanie kraw�?dzi grafu $G$.
+
+\paragraph{Opis algorytmu:} Algorytm koloruje kolejne kraw�?dzie
+metod�? zach�?ann�?, w kolejno�?ci wyznaczonej przez implementacj�?
+(iterator kraw�?dzi).
+
+\paragraph{Z�?oşono�?�?:} Dla kaşdej kraw�?dzi wykonywana jest metoda
+zach�?anna, której czas jest rz�?du $O(\Delta)$,
+co sumaryczne daje czas $O(E \Delta)$.
+Z�?oşono�?�? czasowa algorytmu jest wi�?c szacowana na $O(V+E\Delta)$
+[sprawdzamy $O(V E)$].
+Z�?oşono�?�? pami�?ciowa algorytmu jest liniowa $O(V+E)$,
+poniewaş s�?ownik \lstinline|color| ma rozmiar $O(V)$, natomiast 
+pomocniczy s�?ownik \lstinline|saturation| jest ograniczony przez $O(V+E)$.
+
+\paragraph{Uwagi:} Algorytm jest bardzo prosty, ale uzyskane
+kolorowanie moşe nie by�? optymalne nawet dla prostych grafów.
+
+\lstinputlisting[caption={Modu�? \lstinline|edgecolorus|.},
+label={module:edgecolorus}
+]{../src/main/edgecolorus.py}
+
+
+\section{Algorytm RS (NC) kolorowania kraw�?dzi}
+\label{sec:kolorowanie_krawedzi_rs}
+
+\paragraph{Dane wej�?ciowe:} Dowolny graf prosty nieskierowany $G$.
+
+\paragraph{Problem:} Kolorowanie kraw�?dzi grafu $G$.
+
+\paragraph{Opis algorytmu:} Algorytm koloruje kolejne kraw�?dzie
+metod�? zach�?ann�?, w kolejno�?ci pseudolosowej.
+
+\paragraph{Z�?oşono�?�?:} Z�?oşono�?�? jest taka, jak dla algorytmu US,
+czyli w przyblişeniu $O(V+E\Delta)$ [sprawdzamy $O(V E)$].
+W metodzie \lstinline|run()| uzyskuje si�? pseudolosow�? kolejno�?�?
+kraw�?dzi za pomoc�? metody \lstinline|random.shuffle|
+z biblioteki standardowej Pythona, o z�?oşono�?ci $O(E)$.
+Z�?oşono�?�? pami�?ciowa algorytmu jest liniowa $O(V+E)$,
+poniewaş s�?ownik \lstinline|color| ma rozmiar $O(V)$, natomiast 
+pomocniczy s�?ownik \lstinline|saturation| jest ograniczony przez $O(V+E)$.
+
+\paragraph{Uwagi:} Algorytm jest bardzo prosty, ale uzyskane
+kolorowanie moşe nie by�? optymalne nawet dla prostych grafów.
+Algorytm RS w literaturze nosi równieş nazw�? algorytmu NC
+(ang. \emph{naive coloring}).
+
+Łatwo pokaza�?, şe algorytmy US i RS s�? algorytmami 2-aproksymacyjnymi,
+czyli liczba kolorów przydzielonych kraw�?dziom nie przekroczy $2 \chi'(G)$.
+Wiemy, şe $\Delta(G) \le \chi'(G)$. Z drugiej strony, kolorowanie 
+zach�?anne kraw�?dzi moşe wymaga�? liczby kolorów równej
+$2 (\Delta(G) -1) + 1 = 2 \Delta(G) -1$. St�?d liczba kolorów $k$ 
+wykorzystanych do kolorowania kraw�?dzi grafu ma ograniczenie
+\begin{equation}
+\chi'(G) \le k \le 2 \Delta(G) -1 < 2 \Delta(G) \le 2 \chi'(G).
+\end{equation}
+
+\lstinputlisting[caption={Modu�? \lstinline|edgecolorrs|.},
+label={module:edgecolorrs}
+]{../src/main/edgecolorrs.py}
+
+
+\section{Kolorowanie kraw�?dzi z BFS}
+\label{sec:kolorowanie_krawedzi_bfs}
+
+\paragraph{Dane wej�?ciowe:} Dowolny graf prosty nieskierowany $G$.
+
+\paragraph{Problem:} Kolorowanie kraw�?dzi grafu $G$.
+
+\paragraph{Opis algorytmu:} Algorytm realizuje przechodzenie przez
+graf metod�? BFS. Kolorowane s�? wszystkie kraw�?dzie wychodz�?ce
+z przetwarzanego wierzcho�?ka (kolorowanie zach�?anne).
+Po zako�?czeniu pracy algorytmu, oprócz s�?ownika \lstinline|color|
+z kolorami kraw�?dzi, otrzymujemy s�?ownik \lstinline|parent|,
+który jest lasem przeszukiwania BFS.
+
+\paragraph{Z�?oşono�?�?:} Przechodzenie przez graf metod�? BFS
+zajmuje czas $O(V+E)$. Dla kaşdej kraw�?dzi wykonywana jest metoda
+\lstinline|_greedy_color|, której czas jest rz�?du $O(\Delta)$,
+co sumaryczne daje czas $O(E \Delta)$.
+Z�?oşono�?�? czasowa algorytmu jest wi�?c szacowana na $O(V+E\Delta)$
+[sprawdzimy $O(V E)$].
+Z�?oşono�?�? pami�?ciowa algorytmu jest liniowa $O(V+E)$,
+poniewaş s�?owniki \lstinline|color| i \lstinline|parent|
+maj�? rozmiar $O(V)$, natomiast pomocniczy s�?ownik \lstinline|_used|
+jest ograniczony przez $O(V+E)$.
+
+\paragraph{Uwagi:} Algorytm wyznacza optymalne kolorowanie kraw�?dzi
+dla drzew.
+Algorytm z klasy \lstinline|BFSEdgeColoring| moşna by nazwa�? równieş
+\emph{Connected Sequential Edge Coloring},
+przez analogi�? do podobnego kolorowania wierzcho�?ków.
+
+\lstinputlisting[caption={Modu�? \lstinline|edgecolorbfs|.},
+label={module:edgecolorbfs}
+]{../src/main/edgecolorbfs.py}
+
+
+\section{Algorytm NTL kolorowania kraw�?dzi}
+\label{sec:kolorowanie_krawedzi_NTL}
+
+Nazwa algorytmu pochodzi od pierwszych liter nazwisk twórców 
+(Nishizeki, Terada, Leven)
+\cite{1983_NTL},
+\cite{1985_Gabow}. 
+W algorytmie wykorzystywane jest przekolorowywanie kraw�?dzi (zamiana kolorów).
+Algorytm NTL przydzieli kraw�?dziom co najwyşej $\Delta + 1$ kolorów.
+Do opisu algorytmu potrzebne s�? pewne definicje
+\cite{Kubale}.
+
+\paragraph{Definicja:} \emph{Kolor brakuj�?cy} (ang. \emph{missing color})
+dla wierzcho�?ka $v$ grafu $G$ to kolor, który nie zosta�?
+przydzielony şadnej kraw�?dzi dochodz�?cej do $v$.
+Symbol $M(v)$ oznacza zbiór wszystkich kolorów brakuj�?cych dla $v$.
+
+\paragraph{Definicja:} Dla kaşdego wierzcho�?ka $v$ ustalamy pewien
+jego kolor brakuj�?cy $m(v)$. 
+\emph{Wachlarz} $F$ (ang. \emph{fan}) przy wierzcho�?ku $v$ jest to ci�?g 
+kraw�?dzi $(v,w_0)$, $(v,w_1)$, \ldots, $(v,w_s)$, taki şe kraw�?dź
+$(v,w_i)$ ma przydzielony kolor $m(w_{i-1})$, $i > 0$.
+Wachlarz rozpoczyna si�? kraw�?dzi�? bez koloru $(v,w_0)$, a liczba $s$
+to rozpi�?to�?�? wachlarza (ang. \emph{span of the fan}).
+
+\paragraph{Stwierdzenie:} Jeşeli wybrana kraw�?dź $(u,v)$ nie jest
+pokolorowana, to kaşdy z wierzcho�?ków $u$, $v$ ma przynajmniej
+dwa kolory brakuj�?ce.
+
+\paragraph{Procedura przekolorowania:} Celem procedury przekolorowania 
+dla kraw�?dzi $(u,v)$ jest uzyskanie \emph{wspólnego} brakuj�?cego koloru
+dla wierzcho�?ków $u$ i $v$, aby ten kolor móg�? by�? uşyty
+do pokolorowania kraw�?dzi $(u,v)$.
+Wyznaczamy maksymalny wachlarz $F$ przy wierzcho�?ku $v$,
+przy czym $w_0 = u$.
+Dalej moşliwe s�? dwa przypadki.
+\newline
+(1) $m(w_s)$ naleşy do $M(v)$. Wtedy kolorujemy kraw�?dzie $(v,w_i)$
+kolorami $m(w_i)$, $i=0, \ldots, s$ [zwalniamy kolor $m(w_0)=m(u)$].
+\newline
+(2) $m(w_s)$ nie naleşy do $M(v)$.
+Rozwaşamy �?cieşk�? $P$ w grafie $G$ zaczynaj�?c�? si�? w $w_s$,
+z�?oşon�? z kraw�?dzi pokolorowanych na przemian kolorami $m(v)$ i $m(w_s)$.
+Dalej jest kilka moşliwo�?ci.
+\newline
+(2a) �?cieşka $P$ jest zerowa.
+Wtedy kraw�?dzie $(v,w_i)$ otrzymuj�? kolor $m(w_i)$, $i=0,\ldots,s-1$,
+kraw�?dź $(v,w_s)$ otrzymuje kolor $m(v)$.
+\newline
+(2b) �?cieşka $P$ osi�?ga wierzcho�?ek $v$.
+Istnieje wtedy kraw�?dź $(v,w_j)$ $(0 < j < s-1)$ [waşne!],
+która ma kolor $m(w_{j-1})=m(w_s)$.
+Zmieniamy kolejno�?�? kolorów na �?cieşce $P$,
+kraw�?dź $(v,w_j)$ otrzymuje kolor $m(v)$,
+kraw�?dzie $(v,w_i)$ otrzymuj�? kolor $m(w_i)$, $i=0,\ldots,j-1$.
+\newline
+(2c) �?cieşka $P$ nie osi�?ga wierzcho�?ka $v$,
+ale osi�?ga wierzcho�?ek $w_j$ b�?d�?cy ko�?cem pewnej kraw�?dzi z wachlarza,
+a do tego �?cieşka ma d�?ugo�?�? nieparzyst�? i kolor przy $w_j$ to $m(v)$.
+Wtedy zmieniamy kolejno�?�? kolorów na �?cieşce $P$,
+kraw�?dź $(v,w_j)$ otrzymuje kolor $m(v)$,
+kraw�?dzie $(v,w_i)$ otrzymuj�? kolor $m(w_i)$, $i=0,\ldots,j-1$
+[jeşeli $w_j=w_0$, to jedyn�? operacj�? jest kolorowanie kraw�?dzi
+$(v,w_0)$ kolorem $m(v)$].
+\newline
+(2d) �?cieşka $P$ nie osi�?ga wierzcho�?ka $v$ i nie dochodzi
+do brzegu wachlarza kolorem $m(v)$.
+Wtedy zmieniamy kolejno�?�? kolorów na �?cieşce $P$,
+kraw�?dź $(v,w_s)$ otrzymuje kolor $m(v)$,
+kraw�?dzie $(v,w_i)$ otrzymuj�? kolor $m(w_i)$, $i=0,\ldots,s-1$.
+
+\paragraph{Dane wej�?ciowe:} Dowolny graf prosty nieskierowany $G$.
+
+\paragraph{Problem:} Kolorowanie kraw�?dzi grafu $G$.
+
+\paragraph{Opis algorytmu:} Algorytm rozpoczyna si�? od wyznaczenia
+stopnia grafu $\Delta(G)$. Jeşeli $\Delta(G) \le 2$, to uruchamiany jest
+prosty algorytm kolorowania kraw�?dzi, w naszej implementacji jest to
+kolorowanie kraw�?dzi z BFS.
+Dla wi�?kszych $\Delta(G)$ algorytm wyznacza liczb�? dost�?pnych kolorów
+jako $k = \Delta(G) + 1$, nast�?pnie próbuje zach�?annie przydzieli�?
+kaşdej kraw�?dzi najmniejszy wspólny kolor brakuj�?cy jej ko�?ców.
+Jeşeli nie istnieje wspólny kolor brakuj�?cy, to dla kraw�?dzi
+uruchamiana jest kluczowa metoda \lstinline|_recolor|,
+omawiana wcze�?niej.
+
+\paragraph{Z�?oşono�?�?:} Procedura przekolorowania moşe dzia�?a�? w czasie
+liniowym, st�?d ca�?kowity czas pracy algorytmu NTL wynosi $O(V E)$
+\cite{Kubale}.
+Z�?oşono�?�? pami�?ciow�? algorytmu szacujemy na $O(V^2)$
+[s�?ownik \lstinline|missing|].
+
+\paragraph{Uwagi:} Algorytm wyznacza optymalne kolorowanie kraw�?dzi
+dla szerokiej rodziny grafów, m.in. dla grafów cyklicznych $C_n$,
+grafów ko�?owych $W_n$, gwiazd $K_{1,s}$, grafów planarnych $(\Delta \ge 9)$
+i prawie wszystkich grafów przypadkowych
+\cite{Kubale}.
+Testy naszej implementacji pokazuj�?, şe przekolorowanie kraw�?dzi
+pojawia si�? dopiero po pewnym czasie pracy algorytmu, poniewaş
+na pocz�?tku s�? dost�?pne wspólne kolory brakuj�?ce.
+Po drugie, warto podkre�?li�? znaczenie warunku $k=\Delta+1$,
+nawet gdy wiemy, şe powinno wystarczy�? $\Delta$ kolorów
+(grafy dwudzielne). Dzi�?ki temu warunkowi istnieje kolor
+brakuj�?cy dla wierzcho�?ka z wszystkimi pokolorowanymi kraw�?dziami,
+a to jest potrzebne przy przekolorowywaniu wachlarza.
+Po trzecie, w znanej nam literaturze opis procedury przekolorowania
+kraw�?dzi jest niepe�?ny, brakuje istotnego przypadku 2c,
+kiedy �?cieşka dochodzi do brzegu wachlarza, ale nie osi�?ga
+jego centrum.
+
+\lstinputlisting[caption={Modu�? \lstinline|edgecolorntl|.},
+label={module:edgecolorntl}
+]{../src/main/edgecolorntl.py}
+
+
+\section{Algorytm Misry i Griesa kolorowania kraw�?dzi}
+\label{sec:kolorowanie_krawedzi_Misra_Gries}
+
+Inny algorytm gwarantuj�?cy przydzielenie co najwyşej $\Delta+1$
+kolorów zosta�? opublikowany przez Misr�? i Griesa
+\cite{1992_Misra_Gries}.
+Jego z�?oşono�?�? obliczeniowa wynosi $O(V E)$.
+W algorytmie korzysta si�? z wachlarzy, wykonuje si�? operacje
+rotowania wachlarzy i odwracania �?cieşek
+\cite{wiki_Misra_Gries}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Inne modele kolorowania grafów}
+\label{ch:inne_modele_kolorowania}
+
+Klasyczne modele kolorowania grafów s�? wzbogacane dodatkowymi elementami,
+które s�? dodatkowymi wi�?zami, albo uogólnieniami.
+W tym rozdziale przedstawimy wybrane nowe warianty kolorowania grafów.
+
+\section{Sprawiedliwe kolorowanie grafów}
+\label{sec:kolorowanie_sprawiedliwe}
+
+Sprawiedliwe kolorowanie grafów (ang. \emph{equitable coloring})
+polega na kolorowaniu wierzcho�?ków tak, aby (1) dwa s�?siednie
+wierzcho�?ki mia�?y róşne kolory, oraz (2) liczby wierzcho�?ków
+w dowolnych dwóch klasach kolorów róşni�?y si�? co najwyşej o jeden
+\cite{wiki_equitable_coloring}.
+Podobnie definiuje si�? sprawiedliwe kolorowanie kraw�?dzi.
+
+\section{Totalne kolorowanie grafów}
+\label{sec:kolorowanie_totalne}
+
+Totalne kolorowanie grafów (ang. \emph{total coloring})
+polega na jednoczesnym kolorowaniu wierzcho�?ków i kraw�?dzi,
+przy czym şadne dwa s�?siednie obiekty nie mog�? mie�? tego samego koloru
+\cite{wiki_total_coloring}.
+
+
+
+\section{Kolorowanie grafów w trybie on-line}
+\label{sec:kolorowanie_online}
+
+Klasyczne algorytmy dzia�?aj�? w trybie \emph{off-line},
+czyli ca�?y zbiór danych reprezentuj�?cych instancj�? (graf)
+jest znany przed przyst�?pieniem do dzia�?ania.
+Jednak w pewnych problemach zbiór danych moşe by�? poznawany etapami
+i wtedy rozwi�?zanie musi by�? budowane na bieş�?co.
+Odpowiedni algorytm musi dzia�?a�? w trybie \emph{on-line}.
+Raz wygenerowane rozwi�?zanie cz�?�?ciowe nie moşe by�? modyfikowane.
+Algorytm nie ma şadnej znajomo�?ci przysz�?ych porcji danych.
+Problemy w wersji on-line s�? trudniejsze niş off-line,
+a otrzymane rozwi�?zania mog�? by�? nişszej jako�?ci.
+
+Kolorowanie on-line definiuje si�? jako sekwencj�? şada�?,
+z których kaşde zawiera nowy wierzcho�?ek $v$ i podzbiór kraw�?dzi
+�?�?cz�?cych nowy wierzcho�?ek $v$ z niektórymi ujawnionymi wcze�?niej
+wierzcho�?kami. Algorytm on-line ma przyporz�?dkowa�? wierzcho�?kowi
+$v$ dopuszczalny kolor.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Podsumowanie}
+\label{ch:podsumowanie}
+
+Najwaşniejszym zagadnieniem omawianym w niniejszej pracy
+by�?o kolorowanie wierzcho�?ków i kraw�?dzi grafów.
+Wykonano przegl�?d algorytmów kolorowania wierzcho�?ków,
+w kilku przypadkach stworzono nowe implementacje.
+Zestawienie nowych i istniej�?cych modu�?ów z biblioteki grafów
+znajduje si�? w dodatku \ref{app:biblioteka_grafow}.
+Ponişej krótko omówimy wyniki pracy.
+
+Zaimplementowano algorytm z powrotami rozwi�?zuj�?cy problem
+$m$-ko\-lo\-ro\-wa\-nia grafu.
+Zaimplementowano algorytm korzystaj�?cy z twierdzenia Brooksa.
+Zaimplementowano nowe wersje algorytmów sekwencyjnych
+(US, RS, LF, SL, CS) z wykorzystaniem saturacji.
+Zaimplementowano dwa algorytmy kolorowania wierzcho�?ków metod�? 
+zbiorów niezaleşnych (GIS, RLF).
+
+W pracy zaimplementowano szereg algorytmów kolorowania kraw�?dzi,
+poza istniej�?cym w bibliotece algorytmem wykorzystuj�?cym graf kraw�?dziowy.
+Zaimplementowano trzy algorytmy sekwencyjne (US, RS, BFS),
+oraz algorytm NTL gwarantuj�?cy rozwi�?zanie gorsze najwyşej o jeden
+kolor od optymalnego. Algorytm NTL jest najbardziej z�?oşonym
+algorytmem w niniejszej pracy. Warto podkre�?li�?, şe w literaturze
+cz�?sto moşna znaleź�? niepe�?ny opis procedury przekolorowania kraw�?dzi
+grafu, co zosta�?o wykryte dzi�?ki mechanizmom zabezpieczaj�?cym
+j�?zyka Python. B�?�?dy wynikaj�?ce z niepe�?nego opisu ujawniaj�? si�?
+dopiero dla odpowiednio duşych grafów (oko�?o 100 wierzcho�?ków)
+
+Nie uda�?o si�? znaleź�? wystarczaj�?cych informacji, aby zaimplementowa�?
+algorytm wielomianowy realizuj�?cy twierdzenie K\"{o}niga, czyli algorytm
+wykorzystuj�?cy $\Delta$ kolorów do pokolorowania kraw�?dzi grafu dwudzielnego.
+Innym ciekawym zagadnieniem na przysz�?o�?�? jest implementacja
+algorytmów kolorowania kraw�?dzi grafu planarnego.
+
+W pracy zaimplementowano dwa algorytmy wyznaczaj�?ce pokrycie
+wierzcho�?kowe grafu. Pierwszy to algorytm 2-aproksymacyjny,
+a drugi to algorytm zach�?anny. Sprawdzono eksperymentalnie
+liniow�? z�?oşono�?�? czasow�? tych algorytmów.
+
+Przy komputerowym szukaniu rozwi�?za�? jakiego�? problemu
+kluczow�? spraw�? jest posiadanie pe�?nych testów sprawdzaj�?cych
+poprawno�?�? uzyskanego rozwi�?zania. Dlatego w pracy przygotowano
+testy sprawdzaj�?ce poprawno�?�? rozwi�?za�? dla problemu 
+wyznaczania zbioru niezaleşnego, pokrycia wierzcho�?kowego,
+kolorowania wierzcho�?ków i kraw�?dzi grafu.
+Ponadto sprawdzono praktyczn�? z�?oşono�?�? obliczeniow�?
+zaimplementowanych algorytmów.
+Wykorzystano istniej�?ce generatory grafów, jak równieş
+stworzono generator grafów dwudzielnych przypadkowych.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\chapter{Algorytmy i struktury danych z~biblioteki grafów}
+\label{app:biblioteka_grafow}
+
+Dla wygody czytelnika w tabeli \ref{tab:algorytmy_ifuj}
+zebrano modu�?y istniej�?ce wcze�?niej w bibliotece grafów,
+a w tabeli \ref{tab:new_modules} zestawiono nowo powsta�?e modu�?y
+i nowe implementacje istniej�?cych modu�?ów.
+
+
+\begin{table}
+\centering
+\caption[Algorytmy i struktury danych z biblioteki grafów IF UJ.]{
+Algorytmy i struktury danych z biblioteki grafów rozwijanej 
+w~Instytucie Fizyki UJ, które wykorzystano w pracy.
+\label{tab:algorytmy_ifuj}}
+\begin{tabular}{|l|l|}
+\hline 
+\textbf{Klasa lub funkcja}   & \textbf{Modu�?}  \\
+%\hline 
+%\lstinline||  &  \lstinline||  \\
+\hline 
+\lstinline|Edge|  &  \lstinline|edges|  \\
+\hline 
+\lstinline|Graph|  &  \lstinline|graphs|  \\
+\hline 
+\lstinline|MultiGraph|  &  \lstinline|multigraphs|  \\
+\hline 
+\lstinline|GraphFactory|  &  \lstinline|factory|  \\
+\hline 
+\lstinline|SimpleBFS|  &  \lstinline|bfs|  \\
+\hline 
+\lstinline|SimpleDFS|  &  \lstinline|dfs|  \\
+\hline 
+\lstinline|BipartiteGraphBFS|  &  \lstinline|bipartite|  \\
+\hline 
+\lstinline|is_connected|  &  \lstinline|connected|  \\
+\hline 
+\lstinline|ExactNodeColoring|  &  \lstinline|nodecolorexact|  \\
+\hline 
+\lstinline|USINodeColoring|  &  \lstinline|nodecolorusi|  \\
+\hline 
+\lstinline|RSINodeColoring|  &  \lstinline|nodecolorrsi|  \\
+\hline 
+\lstinline|CSINodeColoring|  &  \lstinline|nodecolorcsi|  \\
+\hline 
+\lstinline|DSATURNodeColoring|  &  \lstinline|nodecolordsatur|  \\
+\hline 
+\lstinline|EdgeColoringWithLineGraph| &  \lstinline|edgecolorlg| \\
+\hline 
+\end{tabular}
+\end{table}
+
+
+
+\begin{table}
+\centering
+\caption[Nowe modu�?y dodane do biblioteki grafów.]{
+Nowe modu�?y dodane do biblioteki grafów.
+Znak $\dagger$ oznacza now�? implementacj�? danego modu�?u.
+\label{tab:new_modules}}
+\begin{tabular}{|l|l|}
+\hline 
+\textbf{Klasa lub funkcja}   & \textbf{Modu�?}  \\
+%\hline 
+%\lstinline||  &  \lstinline||  \\
+\hline 
+\lstinline|NodeCoverSet|  &  \lstinline|nodecoverapp|  \\
+\hline 
+\lstinline|DegreeNodeCoverSet| &  \lstinline|nodecoverdeg| \\
+\hline 
+\lstinline|GISNodeColoring|  &  \lstinline|nodecolorgis|  \\
+\hline 
+\lstinline|RLFNodeColoring|  &  \lstinline|nodecolorrlf|  \\
+\hline 
+\lstinline|UnorderedSequentialNodeColoring|  &  \lstinline|nodecolorus| $\dagger$ \\
+\hline 
+\lstinline|RandomSequentialNodeColoring|  &  \lstinline|nodecolorrs| $\dagger$ \\
+\hline 
+\lstinline|ConnectedSequentialNodeColoring|  &  \lstinline|nodecolorcs| $\dagger$ \\
+\hline 
+\lstinline|SmallestLastNodeColoring|  &  \lstinline|nodecolorsl| $\dagger$ \\
+\hline 
+\lstinline|LargestFirstNodeColoring|  &  \lstinline|nodecolorlf| $\dagger$ \\
+\hline 
+\lstinline|BrooksNodeColoring|  &  \lstinline|nodecolorbrooks|  \\
+\hline 
+\lstinline|BacktrackingNodeColoring|  &  \lstinline|nodecolorbt|  \\
+\hline 
+\lstinline|UnorderedSequentialEdgeColoring|  &  \lstinline|edgecolorus|  \\
+\hline 
+\lstinline|RandomSequentialEdgeColoring|  &  \lstinline|edgecolorrs|  \\
+\hline 
+\lstinline|BFSEdgeColoring|  &  \lstinline|edgecolorbfs|  \\
+\hline 
+\lstinline|NTLEdgeColoring|  &  \lstinline|edgecolorntl|  \\
+\hline 
+\end{tabular}
+\end{table}
+
+
+\chapter{Testy pokrycia wierzcho�?kowego}
+\label{app:test_vertex_cover}
+
+Testowanie algorytmu aproksymacyjnego.
+Potwierdzona zaleşno�?�? liniowa $O(V+E)$ (graf przypadkowy z $p=0.2$).
+Wyniki testu s�? przedstawione na rysunku \ref{fig:nodecoverapp}.
+
+Testowanie algorytmu zach�?annego.
+Potwierdzona zaleşno�?�? liniowa $O(V+E)$ (graf przypadkowy z $p=0.2$).
+Wyniki testu s�? przedstawione na rysunku \ref{fig:nodecoverdeg}.
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_cover/cover2.pdf}
+\caption[Wydajno�?�? algorytmu aproksymacyjnego pokrycia wierzcho�?kowego.]{
+\label{fig:nodecoverapp}
+Wykres wydajno�?ci algorytmu aproksymacyjnego pokrycia wierzcho�?kowego
+dla grafów przypadkowych.
+Wspó�?czynnik $a$ bliski 1 potwierdza zaleşno�?�? liniow�?.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_cover/cover3.pdf}
+\caption[Wydajno�?�? algorytmu zach�?anego pokrycia wierzcho�?kowego.]{
+\label{fig:nodecoverdeg}
+Wykres wydajno�?ci algorytmu zach�?annego pokrycia wierzcho�?kowego
+dla grafów przypadkowych.
+Wspó�?czynnik $a$ bliski 1 potwierdza zaleşno�?�? liniow�?.}
+\end{figure}
+
+
+\chapter{Testy kolorowania wierzcho�?ków}
+\label{app:test_vertex_coloring}
+
+W ramach pracy wykonano testy algorytmów kolorowania wierzcho�?ków.
+Dla algorytmów sekwencyjnych i algorytmów zbiorów niezaleşnych
+wyznaczono �?rednie liczby kolorów przydzielonych przez algorytmy
+grafom przypadkowym. Wyniki zestawiono w tabelach
+\ref{tab:kolory1000} i \ref{tab:kolory05}.
+
+Testowanie algorytmu z powrotami.
+Dla sieci trójk�?tnej i 3 kolorów [optymalne kolorowanie] zaleşno�?�? 
+nie jest wielomianowa.
+Dla sieci trójk�?tnej i 2 kolorów [brak rozwi�?zania] zaleşno�?�?
+jest praktycznie $O(V)$.
+Dla sieci kwadratowej i 2 kolorów [optymalne kolorowanie]
+zaleşno�?�? jest praktycznie $O(V)$.
+Dla grafu ko�?o i 4 kolorów [optymalne kolorowanie przy parzystej
+liczbie wierzcho�?ków] zaleşno�?�? jest praktycznie $O(V)$.
+Ogólny wniosek jest taki, şe dla ma�?ej liczby kolorów algorytm
+nie jest aş tak powolny, jak sugeruje pesymistyczne oszacowanie.
+
+Testowanie algorytmu z twierdzenia Brooksa.
+Dla grafu pe�?nego bez jednej kraw�?dzi potwierdzamy z�?oşono�?�? $O(V^2)$
+[optymalne $\Delta=|V|-1$ kolorów].
+Dla planarnego kubicznego grafu Halina (graf 3-spójny)
+dostajemy zaleşno�?�? blisk�? $O(V)$ [optymalne $\Delta=3$ kolory],
+co wynika z ma�?ej liczby kraw�?dzi $|E|=3|V|/2$ 
+i ma�?ej liczby potrzebnych kolorów.
+Wyniki testów s�? przedstawione na rysunkach 
+\ref{fig:nodecolorbrooks1} i
+\ref{fig:nodecolorbrooks2}.
+Bardziej szczegó�?owa analiza z�?oşono�?ci algorytmu sugeruje 
+wyraz $O(V+E)$ pochodz�?cy z BFS i wyraz $O(V \Delta)$
+z zastosowania metody \lstinline|_greedy_color|.
+Ł�?czna z�?oşono�?�? $O(V + E + V \Delta)$ rzeczywi�?cie redukuje si�?
+do $O(V)$ w przypadku kubicznych grafów Halina.
+
+Testowanie algorytmu GIS.
+Potwierdza si�? z�?oşono�?�? $O(V E)$.
+Z analizy kodu nie bardzo wida�? tej zaleşno�?ci.
+W testach sprawdzono dwie implementacje, z kopi�? grafu 
+i s�?ownikiem zawieraj�?cym stopnie wierzcho�?ków podgrafu.
+Szybsza jest wersja z kopi�? grafu.
+Testowano grafy przypadkowe i sie�? trójk�?tn�?.
+Wyniki testów dla grafów przypadkowych s�? przedstawione 
+na rysunku \ref{fig:nodecolorgis}.
+
+Testowanie algorytmu RLF.
+Potwierdza si�? z�?oşono�?�? $O(V E)$.
+Mamy dwie implementacje (jak dla GIS), z kopi�? grafu
+i s�?ownikiem zawieraj�?cym stopnie wierzcho�?ków podgrafu.
+Szybsza jest wersja ze s�?ownikiem zawieraj�?cym stopnie wierzcho�?ków.
+Testowano grafy przypadkowe i sie�? trójk�?tn�?.
+Wyniki testów dla grafów przypadkowych s�? przedstawione 
+na rysunku \ref{fig:nodecolorrlf}.
+
+Testowanie algorytmu SL.
+W bibliotece by�?a dost�?pna implementacja ze s�?ownikiem zawieraj�?cym 
+stopnie wierzcho�?ków podgrafu.
+Dodano implementacj�? z kopi�? grafu.
+Szybsza jest wersja ze s�?ownikiem zawieraj�?cym stopnie wierzcho�?ków.
+Testowano grafy przypadkowe i sie�? trójk�?tn�?.
+Testy sugeruj�? z�?oşono�?�? typu $O(V^2)$.
+
+\begin{table}
+\centering
+\caption[Wyniki kolorowania grafów przypadkowych z $n=1000$.]{
+�?rednia liczba kolorów potrzebnych do pokolorowania grafu 
+losowego z liczb�? wierzcho�?ków $n=1000$ w zaleşno�?ci od
+prawdopodobie�?stwa $p$ istnienia kraw�?dzi mi�?dzy wierzcho�?kami.
+Algorytm GIS generuje prawie zawsze najmniej kolorów.
+\label{tab:kolory1000}}
+\begin{tabular}{|r|r|r|r|r|r|}
+  \hline 
+$p$ & \textbf{LF} & \textbf{SL}  & \textbf{SLF}  & \textbf{GIS} & \textbf{RLF} \\
+  \hline 
+0.1 &28.4  &29.2  &25.4  &26.7  &26.9  \\
+  \hline 
+0.2 &50.1  &51.6  &45.9  &45.5  &46.7  \\
+  \hline 
+0.3 &71.8  &73.6  &67.0  &64.3  &66.7  \\
+  \hline 
+0.4 &95.0  &96.9  &89.4  &84.4  &88.0  \\
+  \hline 
+0.5 &122.1  &124.2  &114.3  &106.6  &111.6  \\
+  \hline 
+0.6 &152.5  &153.5  &144.1  &132.5  &138.5  \\
+  \hline 
+0.7 &187.9  &190.3  &180.4  &164.3  &172.7  \\
+  \hline 
+0.8 &235.0  &239.5  &224.6  &208.0  &214.2  \\
+  \hline
+0.9 &312.1  &314.5  &301.0  &281.2  &283.0  \\
+  \hline 
+\end{tabular} 
+\end{table}
+
+
+\begin{table}
+\centering
+\caption[Wyniki kolorowania grafów przypadkowych z $p=0.5$.]{
+�?rednia liczba kolorów potrzebnych do pokolorowania grafu 
+losowego z prawdopodobie�?stwem istnienia kraw�?dzi mi�?dzy kaşd�? par�? 
+wierzcho�?ków $p=0.5$ w zaleşno�?ci od liczby wierzcho�?ków $n$
+Dla ma�?ych grafów najlepszy jest algorytm SLF, a dla wi�?kszych grafów
+(od 500 wierzcho�?ków) najlepszy jest algorytm GIS.
+\label{tab:kolory05}}
+\begin{tabular}{|r|r|r|r|r|r|}
+  \hline 
+$n$  & \textbf{LF} & \textbf{SL} & \textbf{SLF}  & \textbf{GIS}  & \textbf{RLF}  \\
+  \hline 
+10   &3.3  &3.1  &3.2  &3.6  &3.1  \\
+  \hline 
+20   &5.4  &5.0  &4.7  &5.7  &4.9  \\
+  \hline 
+50   &10.9  &11.2  &10.0  &11.8  &10.1  \\
+  \hline 
+100  &19.0  &19.6  &17.2  &18.9  &16.8  \\
+  \hline 
+200  &32.7  &33.3  &30.0  &30.5  &29.0  \\
+  \hline 
+500  &68.2  &69.8  &64.6  &61.6  &62.2  \\
+  \hline 
+1000 &122.3  &123.5  &114.6  &107.1  &110.6  \\
+  \hline 
+\end{tabular} 
+\end{table}
+
+
+
+
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_color/brooks1.pdf}
+\caption[Wydajno�?�? algorytmu z twierdzenia Brooksa (grafy prawie pe�?ne).]{
+\label{fig:nodecolorbrooks1}
+Wykres wydajno�?ci algorytmu kolorowania wierzcho�?ków z~twierdzenia Brooksa
+dla grafów pe�?nych bez jednej kraw�?dzi.
+Wspó�?czynnik $a$ bliski 2 potwierdza z�?oşono�?�? $O(V^2)$.}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_color/brooks2.pdf}
+\caption[Wydajno�?�? algorytmu z twierdzenia Brooksa (grafy Halina).]{
+\label{fig:nodecolorbrooks2}
+Wykres wydajno�?ci algorytmu kolorowania wierzcho�?ków z~twierdzenia Brooksa
+dla kubicznych grafów Halina (grafy planarne 3-spójne).
+Wspó�?czynnik $a$ bliski 1 pokazuje szybsz�? prac�? niş $O(V^2)$,
+nawet liniow�? $O(V)$.}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_gis/gis1a.pdf}
+\caption[Wydajno�?�? algorytmu GIS kolorowania wierzcho�?ków.]{
+\label{fig:nodecolorgis}
+Wykres wydajno�?ci algorytmu GIS kolorowania wierzcho�?ków
+dla grafów przypadkowych z $p=0.5$.
+Wspó�?czynnik $a$ bliski 0.8 potwierdza z�?oşono�?�? $O(V E)$.}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_rlf/rlf1a.pdf}
+\caption[Wydajno�?�? algorytmu RLF kolorowania wierzcho�?ków.]{
+\label{fig:nodecolorrlf}
+Wykres wydajno�?ci algorytmu RLF kolorowania wierzcho�?ków
+dla grafów przypadkowych z $p=0.5$.
+Wspó�?czynnik $a$ bliski 0.8 potwierdza z�?oşono�?�? $O(V E)$.}
+\end{figure}
+
+
+
+\chapter{Testy kolorowania kraw�?dzi}
+\label{app:test_edge_coloring}
+
+Testowanie algorytmów US, RS, BFS kolorowania kraw�?dzi.
+Testy potwierdzaj�?, şe z�?oşono�?�? tych algorytmów nie przekracza $O(V E)$.
+Testy wykonano dla grafów przypadkowych z $p=0.5$.
+Liczba przydzielonych kolorów czasem przekracza $\Delta + 1$.
+Wyniki testów s�? przedstawione na rysunkach 
+\ref{fig:edge_color_us},
+\ref{fig:edge_color_rs},
+\ref{fig:edge_color_bfs}.
+
+Testowanie algorytmu NTL.
+Liczba przydzielonych kolorów to $\Delta$ lub $\Delta + 1$.
+Dla grafów g�?stych potwierdza si�? z�?oşono�?�? $O(V E)$
+(grafy pe�?ne, grafy przypadkowe).
+Dla grafów rzadkich, np. planarnych, algorytm pracuje znacznie szybciej.
+Przyk�?adowo dla sieci trójk�?tnej testy pokazuj�? z�?oşono�?�? rz�?du $O(V)$.
+Wyniki dla grafów przypadkowych z $p=0.5$ przedstawia rysunek
+\ref{fig:edge_color_ntl}.
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_ecolor/edgecolorus1a.pdf}
+\caption[Wydajno�?�? algorytmu US kolorowania kraw�?dzi.]{
+\label{fig:edge_color_us}
+Wykres wydajno�?ci algorytmu US kolorowania kraw�?dzi.
+Wspó�?czynnik $a$ ponişej 1 sugeruje zaleşno�?�? $O(V E)$.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_ecolor/edgecolorrs1a.pdf}
+\caption[Wydajno�?�? algorytmu RS kolorowania kraw�?dzi.]{
+\label{fig:edge_color_rs}
+Wykres wydajno�?ci algorytmu RS kolorowania kraw�?dzi.
+Wspó�?czynnik $a$ ponişej 1 sugeruje zaleşno�?�? $O(V E)$.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_ecolor/edgecolorbfs1a.pdf}
+\caption[Wydajno�?�? algorytmu BFS kolorowania kraw�?dzi.]{
+\label{fig:edge_color_bfs}
+Wykres wydajno�?ci algorytmu BFS kolorowania kraw�?dzi.
+Wspó�?czynnik $a$ ponişej 1 sugeruje zaleşno�?�? $O(V E)$.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=1]{../fig/main_ntl/ntl1a.pdf}
+\caption[Wydajno�?�? algorytmu NTL kolorowania kraw�?dzi.]{
+\label{fig:edge_color_ntl}
+Wykres wydajno�?ci algorytmu NTL kolorowania kraw�?dzi.
+Wspó�?czynnik $a$ bliski 1 potwierdza zaleşno�?�? $O(V E)$.}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% bibliografia
+
+\begin{thebibliography}{99}
+
+\bibitem{Kubale}
+Marek Kubale (red.),
+\emph{Optymalizacja dyskretna: Modele i metody kolorowania grafów},
+Wydawnictwa Naukowo-Techniczne, Warszawa, 2002.
+
+\bibitem{Wojciechowski}
+Jacek Wojciechowski, Krzysztof Pie�?kosz, \emph{Grafy i sieci},
+Wydawnictwo Naukowe PWN, Warszawa 2013.
+
+\bibitem{Wilson}
+Robin J. Wilson, \emph{Wprowadzenie do teorii grafów},
+Wydawnictwo Naukowe PWN, Warszawa 1998.
+
+\bibitem{Deo}
+Narsingh Deo, 
+\emph{Teoria grafów i jej zastosowania w technice i informatyce},
+PWN, Warszawa 1980.
+
+\bibitem{CLRS}
+Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein,
+\emph{Wprowadzenie do algorytmow},
+Wydawnictwo Naukowe PWN, Warszawa 2012.
+
+\bibitem{Python}
+Python Programming Language - Official Website,\\
+\url{https://www.python.org/}.
+
+\bibitem{graphs-dict}
+Andrzej Kapanowski, graphs-dict, GitHub repository, 2015,\\
+\url{https://github.com/ufkapano/graphs-dict/}.
+
+%% kolorowanie wierzcholkow
+
+\bibitem{wiki_graph_coloring}
+Wikipedia, Graph coloring, 2016,\\
+\url{https://en.wikipedia.org/wiki/Graph_coloring}.
+
+\bibitem{1976_Garey_J_S}
+M. R. Garey, D. S. Johnson, L. Stockmeyer, 
+\emph{Some simplified NP-complete graph problems},
+Theoretical Computer Science 1, 237-267 (1976).
+
+\bibitem{wiki_Mycielskian}
+Wikipedia, Mycielskian, 2016,\\
+\url{https://en.wikipedia.org/wiki/Mycielskian}.
+
+\bibitem{1941_Brooks}
+Rowland Leonard Brooks, 
+\emph{On Coloring the Nodes of a Network},
+Proc. Cambridge Philos. Soc. 37, 194-197 (1941).
+
+\bibitem{wiki_Brooks}
+Wikipedia, Brooks' theorem, 2016,\\
+\url{https://en.wikipedia.org/wiki/Brooks'_theorem}.
+
+\bibitem{1975_Lovasz}
+Laszlo Lovasz,
+\emph{Three short proofs in graph theory},
+Journal of Combinatorial Theory (B) 19, 269-271 (1975).
+
+\bibitem{1969_Melnikov_Vizing}
+L. S. Melnikov, V. G. Vising,
+\emph{New Proof of Brooks' Theorem},
+Journal of Combinatorial Theory 7, 289-290 (1989).
+
+\bibitem{2014_Cranston_Rabern}
+Daniel W. Cranston, Landon Rabern,
+\emph{Brooks' Theorem and Beyond},
+arXiv:1403.0479 [math.CO].
+
+\bibitem{1997_Robertson}
+Neal Robertson, Daniel Sanders, Paul Seymour, and Robin Thomas,
+\emph{The four-colour theorem},
+Journal of Combinatorial Theory, Series B 70, 2-44 (1997).
+
+\bibitem{wiki_independent_set}
+Wikipedia, Independent set (graph theory), 2016,\\
+\url{https://en.wikipedia.org/wiki/Independent_set_(graph_theory)}.
+
+\bibitem{wiki_vertex_cover}
+Wikipedia, Vertex cover, 2016,\\
+\url{https://en.wikipedia.org/wiki/Vertex_cover}.
+
+\bibitem{wiki_greedy_coloring}
+Wikipedia, Greedy coloring, 2016,\\
+\url{https://en.wikipedia.org/wiki/Greedy_coloring}.
+
+\bibitem{wiki_crown_graph}
+Wikipedia, Crown graph, 2016,\\
+\url{https://en.wikipedia.org/wiki/Crown_graph}.
+
+\bibitem{2008_Matula_Beck}
+David W. Matula, Leland L. Beck,
+\emph{Smallest-Last Ordering and Clustering and Graph Coloring Algorithms},
+Journal of the Associacion for Computing Machinery 30(3), 417-427 (1983).
+
+\bibitem{1979_Leighton}
+Frank Thomson Leighton,
+\emph{A Graph Coloring Algorithm for Large Scheduling Problems},
+Journal of Research of the National Bureau of Standards
+84, 489-505 (1979).
+
+%% kolorowanie krawedzi
+
+\bibitem{wiki_edge_coloring}
+Wikipedia, Edge coloring, 2016,\\
+\url{https://en.wikipedia.org/wiki/Edge_coloring}.
+
+\bibitem{wiki_snark}
+Wikipedia, Snark (graph theory), 2016,\\
+\url{https://en.wikipedia.org/wiki/Snark_(graph_theory)}.
+
+\bibitem{1982_Cole_Hopcroft}
+Richard Cole, John E. Hopcroft,
+\emph{On edge coloring bipartite graphs}, 
+SIAM Journal on Computing 11, 540-546 (1982).
+
+\bibitem{2001_Sanders_Zhao}
+Daniel P. Sanders, Yue Zhao,
+\emph{Planar Graphs of Maximum Degree Seven are Class I},
+Journal of Combinatorial Theory, Series B 83, 201-212 (2001).
+
+\bibitem{1990_Chrobak_Nishizeki}
+Marek Chrobak, Takao Nishizeki,
+\emph{Improved Edge-Coloring Algorithms for Planar Graphs},
+Journal of Algorithms 11, 102-116 (1990).
+
+\bibitem{1985_Gabow}
+H. N. Gabow, T. Nishizeki, O. Kariv, D. Leven, O. Terada, 
+\emph{Algorithms for edge-coloring graphs}, 
+TR-41/85, Department of Computer Science, Tel Aviv University (1985).
+
+\bibitem{wiki_matching}
+Wikipedia, Matching (graph theory), 2016,\\
+\url{https://en.wikipedia.org/wiki/Matching_(graph_theory)}.
+
+\bibitem{wiki_bipartite_graph}
+Wikipedia, Bipartite graph, 2016,\\
+\url{https://en.wikipedia.org/wiki/Bipartite_graph}.
+
+\bibitem{wiki_edge_cover}
+Wikipedia, Edge cover, 2016,\\
+\url{https://en.wikipedia.org/wiki/Edge_cover}.
+
+\bibitem{1983_NTL}
+T. Nishizeki, O. Terada, D. Leven,
+\emph{Algorithms for edge-coloring graphs}, 
+Dept. Elec. Comm. Tohoku University, 
+Technical Report TRECIS 83001 (1983). 
+
+\bibitem{1992_Misra_Gries}
+Jayadev Misra, David Gries,
+\emph{A Constructive Proof of Vizing�??s Theorem},
+Information Processing Letters 41 (3), 131-133 (1992).
+
+\bibitem{wiki_Misra_Gries}
+Wikipedia, Misra \& Gries edge coloring algorithm, 2016,\\
+\url{https://en.wikipedia.org/wiki/Misra_%26_Gries_edge_coloring_algorithm}.
+
+%% inne modele kolorowania
+
+\bibitem{wiki_equitable_coloring}
+Wikipedia, Equitable coloring, 2016,\\
+\url{https://en.wikipedia.org/wiki/Equitable_coloring}.
+
+\bibitem{wiki_total_coloring}
+Wikipedia, Total coloring, 2016,\\
+\url{https://en.wikipedia.org/wiki/Total_coloring}.
+
+
+\end{thebibliography}
+
+\end{document}

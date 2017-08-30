@@ -19,6 +19,9 @@
 
 package com.appstreaming.main;
 
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 import com.xuggle.xuggler.ICodec;
@@ -35,6 +38,10 @@ import com.xuggle.xuggler.IVideoResampler;
 import com.xuggle.xuggler.Utils;
 import com.xuggle.xuggler.demos.VideoImage;
 
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 /**
  * Takes a FFMPEG device driver name (ex: "video4linux2"), and a device name (ex: /dev/video0), and displays video
  * from that device.  For example, a web camera.
@@ -50,7 +57,51 @@ import com.xuggle.xuggler.demos.VideoImage;
  */
 public class DisplayWebcamVideo
 {
+    public static JSlider slider, slider2;
+    public ChangeEvent e;
+    private JFrame mainFrame;
+    private JLabel headerLabel;
+    private JLabel statusLabel;
+    private JPanel controlPanel;
     /**
+     *
+     * contrast , kolor , brightness YUV
+     protected static int convertYUVtoRGB(int y, int u, int v) {
+     // based on http://en.wikipedia.org/wiki/Yuv#Y.27UV444_to_RGB888_conversion
+     int c = y - 16;
+     int d = u - 128;
+     int e = v - 128;
+     int r = clamp8bit((298 * c + 409 * e + 128) >> 8);
+     int g = clamp8bit((298 * c - 100 * d - 208 * e + 128) >> 8);
+     int b = clamp8bit((298 * c + 516 * d + 128) >> 8);
+
+     return (r << 16) | (g << 8) | b;
+     }
+
+     protected BufferedImage convertYUYV422toRGB(int width, int height, ByteBuffer buffer) {
+     byte[] input = new byte[width * height * 2];
+     buffer.get(input);
+
+     int[] output = new int[width * height];
+     int i = 0;
+     int j = 0;
+     for (int y = 0; y < height; y++) {
+     for (int x = 0; x < width; x += 2) {
+     int y0 = input[i++] & 0xFF;
+     int u = input[i++] & 0xFF;
+     int y1 = input[i++] & 0xFF;
+     int v = input[i++] & 0xFF;
+     output[j++] = convertYUVtoRGB(y0, u, v);
+     output[j++] = convertYUVtoRGB(y1, u, v);
+     }
+     }
+
+
+
+
+
+
+
      * Takes a FFMPEG webcam driver name, and a device name, opens the
      * webcam, and displays its video in a Swing window.
      * <p>
@@ -95,10 +146,10 @@ public class DisplayWebcamVideo
 
         // Let's make sure that we can actually convert video pixel formats.
         if (!IVideoResampler.isSupported(IVideoResampler.Feature.FEATURE_COLORSPACECONVERSION))
-            throw new RuntimeException("you must install the GPL version of Xuggler (with IVideoResampler support) for this demo to work");
+            throw new RuntimeException("you must install the GPL version of Xuggler ");
 
         // Create a Xuggler container object
-        IContainer container = IContainer.make();
+        IContainer container = IContainer.make();   // file or data source one or more streams
 
         // Tell Xuggler about the device format
         IContainerFormat format = IContainerFormat.make();
@@ -113,7 +164,6 @@ public class DisplayWebcamVideo
 
         params.setValue("framerate", "30/1");
         params.setValue("video_size", "800x600");
-
         // Open up the container
         int retval = container.open(deviceName, IContainer.Type.READ, format,
                 false, true, params, null);
@@ -131,7 +181,7 @@ public class DisplayWebcamVideo
         // and iterate through the streams to find the first video stream
         int videoStreamId = -1;
         IStreamCoder videoCoder = null;
-        for(int i = 0; i < numStreams; i++)
+        for(int i = 0; i < numStreams; i++) // stream number
         {
             // Find the stream object
             IStream stream = container.getStream(i);
@@ -156,10 +206,12 @@ public class DisplayWebcamVideo
             throw new RuntimeException("could not open video decoder for container: "+deviceName);
 
         IVideoResampler resampler = null;
-        if (videoCoder.getPixelType() != IPixelFormat.Type.BGR24)
+        if (videoCoder.getPixelType() != IPixelFormat.Type.RGB24)
         {
             // if this stream is not in BGR24, we're going to need to
             // convert it.  The VideoResampler does that for us.
+
+            IStream stream=videoCoder.getStream();
             resampler = IVideoResampler.make(videoCoder.getWidth(), videoCoder.getHeight(), IPixelFormat.Type.BGR24,
                     videoCoder.getWidth(), videoCoder.getHeight(), videoCoder.getPixelType());
             if (resampler == null)
@@ -168,7 +220,7 @@ public class DisplayWebcamVideo
     /*
      * And once we have that, we draw a window on screen
      */
-        openJavaWindow();
+        new DisplayWebcamVideo().openJavaWindow();
 
     /*
      * Now, we start walking through the container looking at each packet.
@@ -214,6 +266,7 @@ public class DisplayWebcamVideo
                         if (resampler != null)
                         {
                             // we must resample
+
                             newPic = IVideoPicture.make(resampler.getOutputPixelFormat(), picture.getWidth(), picture.getHeight());
                             if (resampler.resample(newPic, picture) < 0)
                                 throw new RuntimeException("could not resample video from: " + deviceName);
@@ -222,6 +275,9 @@ public class DisplayWebcamVideo
                             throw new RuntimeException("could not decode video as BGR 24 bit data in: " + deviceName);
 
                         // Convert the BGR24 to an Java buffered image
+                       System.out.println(slider.getValue());
+                        System.out.println(newPic.getHeight());
+                        System.out.println("Pixel type: " + videoCoder.getPixelType().toString());
                         BufferedImage javaImage = Utils.videoPictureToImage(newPic);
 
                         // and display it on the Java Swing window
@@ -271,10 +327,58 @@ public class DisplayWebcamVideo
     /**
      * Opens a Swing window on screen.
      */
-    private static void openJavaWindow()
+
+    private  void openJavaWindow()
     {
         mScreen = new VideoImage();
+        prepareGUI();
+        showSliderDemo();
     }
+
+    private  void prepareGUI(){
+        mainFrame = new JFrame("Controls:");
+        mainFrame.setSize(400 ,400);
+        mainFrame.setLayout(new GridLayout(3, 1));
+
+        mainFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent){
+                System.exit(0);
+            }
+        });
+        headerLabel = new JLabel("", JLabel.CENTER);
+        statusLabel = new JLabel("",JLabel.CENTER);
+        statusLabel.setSize(350,100);
+
+        controlPanel = new JPanel();
+        controlPanel.setLayout(new FlowLayout());
+
+        mainFrame.add(headerLabel);
+        mainFrame.add(controlPanel);
+        mainFrame.add(statusLabel);
+        mainFrame.setVisible(true);
+    }
+    private void showSliderDemo(){
+        headerLabel.setText("Controls your video properties:  ");
+        slider = new JSlider(JSlider.HORIZONTAL,0,800,10);
+        slider2 = new JSlider(JSlider.HORIZONTAL,0,800,10);
+        slider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                statusLabel.setText("Value Contrast : " + ((JSlider)e.getSource()).getValue());
+            }
+        });
+
+
+        slider2.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                statusLabel.setText("Value Brightness: " + ((JSlider)e.getSource()).getValue());
+            }
+        });
+        controlPanel.add(slider);
+        controlPanel.add(slider2);
+        mainFrame.setVisible(true);
+    }
+
+
 
     /**
      * Forces the swing thread to terminate; I'm sure there is a right
